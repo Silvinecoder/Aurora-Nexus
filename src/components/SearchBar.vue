@@ -1,26 +1,16 @@
 <template>
-  <div class="container">
-    <div class="searchContainer">
-      <input
-        type="search"
-        placeholder="Search..."
-        v-model="searchQuery"
-        id="searchBar"
-      />
-    </div>
-    <div class="productContainer">
-      <ul>
-        <li v-for="item in displayedItems" :key="item.id">
-          {{ item.title }}
-        </li>
-      </ul>
-      <button
-        @click="showMore"
-        v-show="displayedItems.length < filteredItems.length"
-      >
-        Show More
-      </button>
-    </div>
+  <div class="searchContainer">
+    <input
+      type="search"
+      placeholder="Search..."
+      v-model="searchQuery"
+      id="searchBar"
+    />
+    <ul class="searchContainerList">
+      <li v-for="item in displayedItems" :key="item.id">
+        {{ item.title }}
+      </li>
+    </ul>
   </div>
 </template>
 <script>
