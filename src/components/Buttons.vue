@@ -1,18 +1,27 @@
-<!-- Buttons.vue -->
 <template>
-  <button @click="goBack">Go Back</button>
+  <button v-if="includeGoBack" @click="goBack">Go Back</button>
+  <button v-if="includeRestart" @click="restart">Restart</button>
 </template>
 
 <script>
-// Buttons.vue
-export const ButtonFunctions = {
+export default {
+  props: {
+    includeGoBack: {
+      type: Boolean,
+      default: false,
+    },
+    includeRestart: {
+      type: Boolean,
+      default: false,
+    },
+  },
   methods: {
     goBack() {
-      console.log("Go back clicked");
-      // Add functionality to go back in the browser's history
-      window.history.back();
-    }
-  }
+      console.log("back");
+    },
+    restart() {
+      console.log("restart");
+    },
+  },
 };
-
 </script>
