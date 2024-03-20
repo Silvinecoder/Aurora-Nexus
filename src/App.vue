@@ -3,7 +3,7 @@ import ProductPage from "./pages/ProductPage.vue";
 </script>
 
 <template>
-  <ProductPage></ProductPage>
+  <ProductPage class="hello-world"></ProductPage>
 </template>
 
 <style></style>

@@ -1,5 +1,5 @@
 <template>
-  <button v-if="includeGoBack" @click="goBack">Go Back</button>
+  <button class="button-xl" v-if="includeGoBack" @click="goBack">Go Back</button>
   <button v-if="includeRestart" @click="restart">Restart</button>
 </template>
 
