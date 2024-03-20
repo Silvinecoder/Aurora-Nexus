@@ -2,7 +2,7 @@
   <div>
     <SearchBar />
     <Buttons :includeGoBack="true" />
-    <Icons />
+    <Icons :includesupermarket="true" />
   </div>
 </template>
 
