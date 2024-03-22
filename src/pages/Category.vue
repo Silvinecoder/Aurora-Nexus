@@ -1,19 +1,23 @@
 <template>
   <div>
-    <SearchBar />
+    <Search />
     <Buttons :includeGoBack="true" />
     <Icons :includesupermarket="true" />
-    <Cards />
+    <div class="cards__container">
+      <Card />
+      <Card />
+      <Card />
+    </div>
   </div>
 </template>
 
 <script>
-import SearchBar from "../components/SearchBar.vue";
+import SearchBar from "../components/Search.vue";
 import Buttons from "../components/Buttons.vue";
 import Icons from "../components/Icons.vue";
-import Cards from "../components/Cards.vue";
+import Card from "../components/Card.vue";
 
 export default {
-  components: { Buttons, SearchBar, Icons, Cards },
+  components: { Buttons, SearchBar, Icons, Card },
 };
 </script>
