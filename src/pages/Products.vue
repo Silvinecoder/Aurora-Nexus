@@ -1,23 +1,31 @@
 <template>
-  <div>
+  <div class="navigation">
     <Search />
     <Buttons :includeGoBack="true" />
-    <Icons :includesupermarket="true" />
-    <div class="cards__container">
-      <Card />
-      <Card />
-      <Card />
-    </div>
+  </div>
+
+  <div class="carousel__container">
+    <Carousel />
+    <Carousel />
+    <Carousel />
+    <Carousel />
+    <Carousel />
+  </div>
+
+  <div class="cards__container">
+    <Card />
+    <Card />
+    <Card />
   </div>
 </template>
 
 <script>
 import SearchBar from "../components/Search.vue";
 import Buttons from "../components/Buttons.vue";
-import Icons from "../components/Icons.vue";
+import Carousel from "../components/Carousel.vue";
 import Card from "../components/Card.vue";
 
 export default {
-  components: { Buttons, SearchBar, Icons, Card },
+  components: { Buttons, SearchBar, Carousel, Card },
 };
 </script>
