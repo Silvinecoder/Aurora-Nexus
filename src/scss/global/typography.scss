@@ -1,14 +1,43 @@
 //font-colors
 $font-white: #ffffff;
-$font-white-2: #EBF2E7;
+$font-white-2: #ebf2e7;
 $font-black: #000000;
-$font-black-2: #1E1E1E;
+$font-black-2: #1e1e1e;
 $font-gray: #525252;
-$font-green: #313D27;
-$font-green-2: #616B5A;
+$font-green: #313d27;
+$font-green-2: #616b5a;
+
+//font-link
+/* <style>
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap')
+</style> */
+
+//font-family
+$font-family: "Lato", sans-serif;
+
+// font-weight
+$font-weight-300: 300;
+$font-weight-400: 400;
+$font-weight-700: 700;
+$font-weight-900: 900;
+
+//font-sizes
+$font-size-1: 8px;
+$font-size-2: 10px;
+$font-size-3: 12px; //error
+$font-size-4: 14px; //p
+$font-size-5: 18px; //h4
+$font-size-6: 20px; //h3
+$font-size-7: 26px; //h2
+$font-size-8: 28px; //h1
 
 p,
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   padding: 0;
   font-size: inherit;
@@ -18,4 +47,3 @@ h1, h2, h3, h4, h5, h6 {
   line-height: inherit;
   color: inherit;
 }
-
