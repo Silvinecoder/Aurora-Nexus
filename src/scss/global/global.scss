@@ -1,0 +1,18 @@
+.hello-world{
+  color: red;
+}
+
+// Colours
+$color-dark-green: #313D27;
+
+
+// remove button and input stylings
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
