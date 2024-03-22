@@ -1,9 +1,9 @@
 <script setup>
-import Category from "./pages/Category.vue";
+import Products from "./pages/Products.vue";
 </script>
 
 <template>
-  <Category class="hello-world"></Category>
+  <Products class="hello-world"></Products>
 </template>
 
 <style></style>
