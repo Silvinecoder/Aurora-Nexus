@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import SearchBar from "../components/Search.vue";
+import Search from "../components/Search.vue";
 import Buttons from "../components/Buttons.vue";
 import Carousel from "../components/Carousel.vue";
 import Card from "../components/Card.vue";
 
 export default {
-  components: { Buttons, SearchBar, Carousel, Card },
+  components: { Buttons, Search, Carousel, Card },
 };
 </script>

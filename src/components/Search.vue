@@ -1,6 +1,7 @@
 <template>
   <div class="searchContainer">
     <input
+      class="searchInput"
       type="search"
       placeholder="Search..."
       v-model="searchQuery"
