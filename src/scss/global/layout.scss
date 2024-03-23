@@ -1,3 +1,16 @@
-.layout{
-  margin: 58px 24px;
+body {
+  display: flex;
+  justify-content: center;
+  margin: $size-4 $size-7;
 }
+
+.category__titles{
+  font-size: $font-size-7;
+  margin: $size-9 0 $size-2 0;
+}
+
+.navigation{
+  display: flex;
+  gap: $size-9;
+}
+

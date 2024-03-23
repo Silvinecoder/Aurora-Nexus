@@ -1,10 +1,11 @@
 .carousel__container{
   display: flex;
-  gap: 14px;
+  justify-content: space-between;
+  gap: $size-4;
 
   .carousel{
-    background-color: red;
-    border-radius: 14px;
+    background-color: $color-green-1;
+    border-radius: $size-4;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,12 +14,8 @@
     height: 78px;
 
     img{
-      width: 45px;
-      height: 45px;
-    }
-
-    p{
-      margin-top: 2px;
+      width: $size-15;
+      height: $size-15;
     }
   }
 }

@@ -1,17 +1,18 @@
 .cards__container {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 14px;
-  
+  gap: $size-4;
+
   .card {
     background-color: blue;
-    border-radius: 14px;
-    max-width: 160px;
+    border-radius: $size-4;
+    max-width: $size-32;
 
     .card__image_button_container {
       position: relative;
-      width: 160px;
-      height: 118px;
+      width: $size-32;
+      height: $size-28;
 
       img {
         width: 100%;
@@ -24,8 +25,8 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        width: 30px;
-        height: 30px;
+        width: $size-12;
+        height: $size-12;
       }
     }
 
