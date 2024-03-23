@@ -13,11 +13,14 @@
         <Carousel />
         <Carousel />
       </div>
-      <h2 class="category__titles">{{ category.titles }}</h2>
-      <div class="cards__container">
-        <Card />
-        <Card />
-        <Card />
+
+      <div class="category_container">
+        <h2 class="category__titles">{{ category.titles }}</h2>
+        <div class="cards__container">
+          <Card />
+          <Card />
+          <Card />
+        </div>
       </div>
     </div>
 </template>
