@@ -5,7 +5,7 @@
   gap: $size-4;
 
   .card {
-    background-color: blue;
+    box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.2);
     border-radius: $size-4;
     max-width: $size-32;
 
@@ -20,8 +20,6 @@
       }
 
       button {
-        background-color: red;
-        border-radius: 4px;
         position: absolute;
         bottom: 0;
         right: 0;

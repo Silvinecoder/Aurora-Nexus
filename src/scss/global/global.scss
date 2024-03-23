@@ -39,12 +39,17 @@ $size-32: 10rem; //160
 $size-33: 10.125rem; //162
 
 // remove button and input stylings
-button, input[type="search"], input[type="reset"] {
+button, input {
 	background: none;
+	border: none;
 	color: inherit;
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
+}
+
+input{
+	cursor: default;
 }
 
 button {

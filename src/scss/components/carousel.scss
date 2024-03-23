@@ -4,6 +4,7 @@
   gap: $size-4;
 
   .carousel{
+    box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.2);
     background-color: $color-green-1;
     border-radius: $size-4;
     display: flex;

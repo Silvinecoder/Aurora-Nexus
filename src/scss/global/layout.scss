@@ -11,6 +11,8 @@ body {
 
 .navigation{
   display: flex;
+  justify-content: space-between;
   gap: $size-9;
+  margin-bottom: $size-7;
 }
 
