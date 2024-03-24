@@ -7,13 +7,6 @@ $font-gray: #525252;
 $font-green: #313d27;
 $font-green-2: #616b5a;
 
-//font-link
-/* <style>
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap')
-</style> */
-
-//font-family
-$font-family: "Lato", sans-serif;
 
 // font-weight
 $font-weight-300: 300;
@@ -31,6 +24,17 @@ $font-size-6: 20px; //h3
 $font-size-7: 26px; //h2
 $font-size-8: 28px; //h1
 
+//font-family
+@font-face {
+  font-family: "Lato";
+  src: url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap') format('woff2');
+}
+
 p,
 h1,
 h2,
@@ -43,7 +47,31 @@ h6 {
   font-size: inherit;
   font-weight: inherit;
   font-style: inherit;
-  font-family: inherit;
+  font-family: "Lato", sans-serif;
   line-height: inherit;
   color: inherit;
+}
+
+p, input{
+  font-size: $font-size-4;
+}
+
+h4{
+  font-size: $font-size-5;
+}
+
+h3{
+  font-size: $font-size-6;
+}
+
+h2{
+  font-size: $font-size-7;
+}
+
+h1{
+  font-size: $font-size-8;
+}
+
+input{
+  font-family: "Roboto", sans-serif;
 }

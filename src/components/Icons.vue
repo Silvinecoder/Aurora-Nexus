@@ -1,4 +1,5 @@
 <template>
+  <!-- gastronomy -->
   <div v-if="includegastronomy" class="supermarkets_images">
     <img src="" alt="" />
   </div>
@@ -6,6 +7,8 @@
     <img src="" alt="" />
     <p></p>
   </div>
+
+  <!-- individual icons -->
   <svg v-if="includestandard" class="standard_icon"></svg>
 </template>
 

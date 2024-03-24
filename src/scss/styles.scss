@@ -1,5 +1,10 @@
 @import 'global/global';
 @import 'global/typography';
-@import 'components/buttons';
+@import 'global/layout';
+
+// components
+@import 'components/search';
+@import 'components/button';
+@import 'components/icon';
 @import 'components/cards';
 @import 'components/carousel';
