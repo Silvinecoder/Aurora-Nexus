@@ -1,9 +1,8 @@
 <script setup>
-import Products from "./pages/Products.vue";
 </script>
 
 <template>
-  <Products></Products>
+  <router-view></router-view>
 </template>
 
 <style></style>
