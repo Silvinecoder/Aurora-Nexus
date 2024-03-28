@@ -1,45 +1,54 @@
 <template>
-    <div class="navigation">
-      <Buttons :GoBack="true" />
-      <Search />
-      <Buttons :goToShoppingList="true" />
+  <div class="navigation">
+    <Search />
+    <Buttons :goToShoppingList="true" />
+  </div>
+
+  <div class="products__body">
+    <div class="carousel__container">
+      <Carousel :imageUrl="'/icons/supermarkets/lidl_3x.png'" :imageAlt="'Lidl Logo'" />
+      <Carousel :imageUrl="'/icons/supermarkets/aldi_3x.png'" :imageAlt="'Lidl Logo'" />
+      <Carousel :imageUrl="'/icons/supermarkets/continente_3x.png'" :imageAlt="'Lidl Logo'" />
+      <Carousel :imageUrl="'/icons/supermarkets/minipreco_3x.png'" :imageAlt="'Lidl Logo'" />
+      <Carousel :imageUrl="'/icons/supermarkets/pingoDoce_3x.png'" :imageAlt="'Lidl Logo'" />
     </div>
 
-    <div class="products__body">
-      <div class="carousel__container">
-        <Carousel />
-        <Carousel />
-        <Carousel />
-        <Carousel />
-        <Carousel />
-      </div>
-
-      <div class="category_container">
-        <h2 class="category__titles">{{ category.titles }}</h2>
-        <div class="cards__container">
-          <Card />
-          <Card />
-          <Card />
-        </div>
+    <div class="cards__category_container" v-for="(category, categoryName) in categories" :key="categoryName">
+      <CategoryTitle :categoryName="categoryName" :goToCategory="goToCategory" :showButton="true" />
+      <div class="cards_container">
+        <Card v-for="product in category.products" :key="product.product_uuid" :product="product"
+          :addToCart="addToCart" />
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 import Search from "../components/Search.vue";
 import Buttons from "../components/Buttons.vue";
 import Carousel from "../components/Carousel.vue";
+import CategoryTitle from '../components/CategoryTitle.vue'
+import categoryAndProductsMixin from '../components/mixins/categoryAndProductsMixin.js'
 import Card from "../components/Card.vue";
 
 export default {
-  components: { Buttons, Search, Carousel, Card },
-
-  data() {
-    return {
-      category: {
-        titles: "Products",
-      },
-    };
+  mixins: [categoryAndProductsMixin],
+  components: { Buttons, Search, Carousel, Card, CategoryTitle },
+  created() {
+    this.fetchCategoriesAndProducts();
   },
+  methods: {
+    addToCart(product) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      console.log('cart', cart);
+      console.log('Product added to cart:', product);
+    },
+    goToCategory(categoryName) {
+      this.$router.push({ name: 'Category', params: { categoryName: categoryName } });
+      console.log('Category button clicked');
+    }
+  }
 };
 </script>

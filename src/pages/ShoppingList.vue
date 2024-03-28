@@ -4,12 +4,12 @@
     <Search />
   </div>
 
-  <h2 class="title">Shopping List</h2>
-  <div class="cards__container">
-    <Card />
-    <Card />
-    <Card />
+  <div v-if="products.length === 0">Your shopping list is empty.</div>
+    <div v-else>
+      <!-- Reuse the Card component to display products -->
+      <Card :products="products" />
   </div>
+
 </template>
 
 <script>
@@ -18,7 +18,18 @@ import Search from "../components/Search.vue";
 import Card from "../components/Card.vue";
 
 export default {
-  components: { Buttons, Search, Card }
+  components: { Buttons, Search, Card },
+
+  data() {
+    return {
+      products: []
+    };
+  },
+  mounted() {
+    // Retrieve products from local storage
+    this.products = JSON.parse(localStorage.getItem('cart')) || [];
+    console.log('products', this.products);
+  }
 };
 
 </script>
