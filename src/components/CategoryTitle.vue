@@ -1,5 +1,5 @@
 <template>
-  <div class="cards__title_and_button_container">
+  <div class="category_title__container category_title_and_button_container">
     <h2 class="cards__category_title">{{ categoryName }}</h2>
     <button v-if="showButton" @click="goToCategory(categoryName)">
       See all

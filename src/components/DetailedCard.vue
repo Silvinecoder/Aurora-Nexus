@@ -5,6 +5,7 @@
     </div>
     <div class="detailed_card__details_container">
       <h2 class="detailed_card__title">{{ product.name }}</h2>
+      <SupermarketLogo :supermarket="product.supermarket" />
       <!-- Add code for displaying reviews and shopping markets here -->
     </div>
     <div class="detailed_card__button_container">
@@ -15,10 +16,14 @@
       </button>
     </div>
   </div>
+  <hr class="detailed_card_hr" />
 </template>
 
 <script>
+import SupermarketLogo from './SupermarketLogo.vue';
+
 export default {
+  components: { SupermarketLogo },
   props: ['product', 'addToCart'],
 };
 </script>

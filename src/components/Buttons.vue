@@ -1,5 +1,4 @@
 <template>
-  <div>
     <button class="back_arrow standard_icon" v-if="GoBack" @click="goBack">
       <svg>
         <use xlink:href="../assets/icons/standard/back-arrow.svg#back_arrow__icon"></use>
@@ -11,7 +10,6 @@
         <use xlink:href="../assets/icons/standard/list.svg#list__icon"></use>
       </svg>
     </button>
-  </div>
 </template>
 
 <script>

@@ -7,15 +7,15 @@
   <div class="products__body">
     <div class="carousel__container">
       <Carousel :imageUrl="'/icons/supermarkets/lidl_3x.png'" :imageAlt="'Lidl Logo'" />
-      <Carousel :imageUrl="'/icons/supermarkets/aldi_3x.png'" :imageAlt="'Lidl Logo'" />
-      <Carousel :imageUrl="'/icons/supermarkets/continente_3x.png'" :imageAlt="'Lidl Logo'" />
-      <Carousel :imageUrl="'/icons/supermarkets/minipreco_3x.png'" :imageAlt="'Lidl Logo'" />
-      <Carousel :imageUrl="'/icons/supermarkets/pingoDoce_3x.png'" :imageAlt="'Lidl Logo'" />
+      <Carousel :imageUrl="'/icons/supermarkets/aldi_3x.png'" :imageAlt="'Aldi Logo'" />
+      <Carousel :imageUrl="'/icons/supermarkets/continente_3x.png'" :imageAlt="'Continente Logo'" />
+      <Carousel :imageUrl="'/icons/supermarkets/minipreco_3x.png'" :imageAlt="'Minipreco Logo'" />
+      <Carousel :imageUrl="'/icons/supermarkets/pingoDoce_3x.png'" :imageAlt="'Pingo Doce Logo'" />
     </div>
 
-    <div class="cards__category_container" v-for="(category, categoryName) in categories" :key="categoryName">
+    <div class="image_cards__category_container" v-for="(category, categoryName) in categories" :key="categoryName">
       <CategoryTitle :categoryName="categoryName" :goToCategory="goToCategory" :showButton="true" />
-      <div class="cards_container">
+      <div class="image_cards_container">
         <Card v-for="product in category.products" :key="product.product_uuid" :product="product"
           :addToCart="addToCart" />
       </div>

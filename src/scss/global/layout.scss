@@ -11,8 +11,13 @@ body {
 
 .navigation{
   display: flex;
-  justify-content: space-between;
   gap: $size-9;
   margin-bottom: $size-7;
+
+  .standard_icon{
+    width: $size-8;
+    height: $size-11;
+    margin: 4px 0;
+  }
 }
 
