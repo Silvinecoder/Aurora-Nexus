@@ -17,7 +17,7 @@
     <div class="detailed_cards__category_container">
       <CategoryTitle :categoryName="categoryName" :goToCategory="goToCategory" :showButton="false" />
       <div class="detailed_cards_container">
-        <DetailedCard v-for="product in categoryProducts" :key="product.product_uuid" :product="product" :addToCart="addToCart" />
+        <DetailedCard v-for="product in categoryProducts" :key="product.product_uuid" :product="product" :addToCart="addToCart" :removeFromCart="removeFromCart" />
       </div>
     </div>
   </div>
@@ -63,6 +63,15 @@ export default {
       localStorage.setItem('cart', JSON.stringify(cart));
       console.log('cart', cart);
       console.log('Product added to cart:', product);
+      this.isAddedToCart = true;
+    },
+    removeFromCart(product) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart = cart.filter((item) => item.product_uuid !== product.product_uuid);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      console.log('cart', cart);
+      console.log('Product removed from cart:', product);
+      this.isAddedToCart = false;
     },
     goToCategory() {
       this.$router.push('/category');

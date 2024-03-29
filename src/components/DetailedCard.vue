@@ -4,17 +4,21 @@
       <img class="detailed_card__image" :src="product.image" :alt="product.name" />
     </div>
     <div class="detailed_card__details_container">
-      <h2 class="detailed_card__title">{{ product.name }}</h2>
-      <SupermarketLogo :supermarket="product.supermarket" />
+      <p class="detailed_card__title">{{ product.name }}</p>
+
       <!-- Add code for displaying reviews and shopping markets here -->
     </div>
-    <div class="detailed_card__button_container">
-      <button class="standard_icon" @click="addToCart">
-        <svg>
-          <use xlink:href="../assets/icons/standard/add.svg#add__icon"></use>
-        </svg>
-      </button>
-    </div>
+    <button v-if="!product.isAddedToCart" class="standard_icon" @click="addToCart(product)">
+      <svg>
+        <use xlink:href="../assets/icons/standard/add.svg#add__icon"></use>
+      </svg>
+    </button>
+    
+    <button  v-else class="standard_icon" @click="removeFromCart(product)">
+      <svg>
+        <use xlink:href="../assets/icons/standard/minus.svg#minus__icon"></use>
+      </svg>
+    </button>
   </div>
   <hr class="detailed_card_hr" />
 </template>
@@ -24,6 +28,6 @@ import SupermarketLogo from './SupermarketLogo.vue';
 
 export default {
   components: { SupermarketLogo },
-  props: ['product', 'addToCart'],
+  props: ['product', 'addToCart', 'removeFromCart'],
 };
 </script>
