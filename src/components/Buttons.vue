@@ -35,6 +35,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    product: {
+      type: Object,
+      default: null,
+    },
     addToCart: {
       type: Function,
       default: null,
