@@ -8,26 +8,19 @@
 
       <!-- Add code for displaying reviews and shopping markets here -->
     </div>
-    <button v-if="!product.isAddedToCart" class="standard_icon" @click="addToCart(product)">
-      <svg>
-        <use xlink:href="../assets/icons/standard/add.svg#add__icon"></use>
-      </svg>
-    </button>
-    
-    <button  v-else class="standard_icon" @click="removeFromCart(product)">
-      <svg>
-        <use xlink:href="../assets/icons/standard/minus.svg#minus__icon"></use>
-      </svg>
-    </button>
+    <div class="detailed_card" :key="product.product_uuid">
+      <Buttons :product="product" :addToCart="addToCart" :removeFromCart="removeFromCart" />
+    </div>
   </div>
   <hr class="detailed_card_hr" />
 </template>
 
 <script>
 import SupermarketLogo from './SupermarketLogo.vue';
+import Buttons from './Buttons.vue';
 
 export default {
-  components: { SupermarketLogo },
+  components: { SupermarketLogo, Buttons },
   props: ['product', 'addToCart', 'removeFromCart'],
 };
 </script>

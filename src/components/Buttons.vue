@@ -10,6 +10,18 @@
         <use xlink:href="../assets/icons/standard/list.svg#list__icon"></use>
       </svg>
     </button>
+
+    <button v-if="product && !product.isAddedToCart" class="standard_icon" @click="addToCart(product)">
+      <svg>
+        <use xlink:href="../assets/icons/standard/add.svg#add__icon"></use>
+      </svg>
+    </button>
+  
+  <button v-if="product && product.isAddedToCart" class="standard_icon" @click="removeFromCart(product)">
+      <svg>
+        <use xlink:href="../assets/icons/standard/minus.svg#minus__icon"></use>
+      </svg>
+  </button>
 </template>
 
 <script>
@@ -22,7 +34,15 @@ export default {
     goToShoppingList: {
       type: Boolean,
       default: false,
-    }
+    },
+    addToCart: {
+      type: Function,
+      default: null,
+    },
+    removeFromCart: {
+      type: Function,
+      default: null,
+    },
   },
   methods: {
     goBack() {
