@@ -4,15 +4,17 @@
     <Search />
   </div>
 
-  <div v-if="products.length === 0">Your shopping list is empty.</div>
-    <div v-else>
-      <!-- Reuse the Card component to display products -->
-      <Card :products="products" />
+  <div v-if="cartIsEmpty">Your shopping list is empty.</div>
+  <div v-else>
+    <!-- Loop over each product and pass it to the Card component -->
+    <Card v-for="product in products" :key="product.product_uuid" :product="product" />
+    <button @click="clearCart">Clear Cart</button>
   </div>
-
 </template>
 
 <script>
+import { fetchData } from '../api/api';
+import { mapState, mapActions } from 'vuex';
 import Buttons from "../components/Buttons.vue";
 import Search from "../components/Search.vue";
 import Card from "../components/Card.vue";
@@ -20,16 +22,27 @@ import Card from "../components/Card.vue";
 export default {
   components: { Buttons, Search, Card },
 
-  data() {
-    return {
-      products: []
-    };
+  computed: {
+    ...mapState({
+      products: state => state.cart
+    }),
+    cartIsEmpty() {
+      return this.products.length === 0;
+    }
   },
-  mounted() {
-    // Retrieve products from local storage
-    this.products = JSON.parse(localStorage.getItem('cart')) || [];
-    console.log('products', this.products);
+  methods: {
+    ...mapActions(['clearCart']),
+    async fetchCartData() {
+      try {
+        const data = await fetchData(); // Call the fetchData function
+        // Process the fetched data...
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  },
+  created() {
+    this.fetchCartData();
   }
 };
-
 </script>

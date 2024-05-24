@@ -4,11 +4,6 @@ export default createStore({
   state: {
     cart: []
   },
-  getters: {
-    categoryProducts: (state) => (categoryName) => {
-      return state.cart.filter(product => product.categoryName === categoryName);
-    },
-  },
   mutations: {
     addToCart(state, product) {
       state.cart.push(product);
