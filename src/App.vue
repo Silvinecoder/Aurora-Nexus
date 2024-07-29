@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-<script setup>
-</script>
-
-<template>
-  <router-view></router-view>
-</template>
-
-<style></style>
-=======
 <template>
     <router-view></router-view>
 
@@ -23,4 +13,3 @@ export default {
   }
 }
 </script>
->>>>>>> main

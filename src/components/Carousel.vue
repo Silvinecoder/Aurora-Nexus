@@ -1,17 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <button class="carousel">
-    <img :src="imageUrl" :alt="imageAlt">
-  </button>
-</template>
-
-
-<script>
-export default {
-  props: ['imageUrl', 'imageAlt']
-}
-</script>
-=======
   <div class="carousel__container">
     <button
       class="carousel"
@@ -35,4 +22,3 @@ export default {
   },
 };
 </script>
->>>>>>> main

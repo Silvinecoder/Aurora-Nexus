@@ -1,16 +1,5 @@
 .searchContainer {
   flex-grow: 4;
-<<<<<<< HEAD
-  
-  .searchInput {
-    border-radius: 5px;
-    border: 1px solid $color-light-green;
-    padding: $size-2;
-    width: 100%;
-  }
-  ul {
-    display: none;
-=======
 }
 
 .search_button {
@@ -27,6 +16,5 @@
 
   &:focus::placeholder {
     color: transparent;
->>>>>>> main
   }
 }
