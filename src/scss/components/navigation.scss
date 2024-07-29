@@ -1,0 +1,30 @@
+.top_container, .welcome_container{
+  display: block;
+  content: ' ';
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+}
+
+.top_container {
+  background-image: url('/src/assets/global/background-cover.svg');
+  position: relative;
+
+  .navigation {
+    padding-top: 62px;
+    display: flex;
+    gap: $size-9;
+  }
+
+  .category__titles {
+    font-size: $font-size-7;
+    margin: $size-9 0 $size-2 0;
+  }
+}
+
+.welcome_container{
+  background-image: url('/src/assets/global/home-cover.svg');
+  height: 12.438rem;
+  padding-top: 51px;
+  color: $color-white;
+}

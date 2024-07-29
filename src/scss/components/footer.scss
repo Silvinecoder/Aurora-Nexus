@@ -1,0 +1,68 @@
+.footer {
+  background-color: $color-white;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid $color-light-green;
+  width: 100%;
+
+  .footer_container {
+    display: flex;
+    justify-content: space-between;
+    padding: $size-7 $size-12;
+
+    .footer_buttons{
+      width: 80px;
+      height: 67px;
+      border-radius: 30px;
+      transition: background-color 0.1s ease-out;
+      
+      &:focus{
+        background-color: $color-orange;
+      }
+    }
+
+    .home_button {
+      background: url("../assets/icons/standard/home.png") no-repeat center;
+
+
+      &.active {
+        background: url("../assets/icons/standard/home_filled.png") no-repeat
+          center;
+      }
+    }
+
+
+    .donations_button {
+      background: url("../assets/icons/standard/donations.png") no-repeat center;
+
+
+      &.active {
+        background: url("../assets/icons/standard/donations_filled.png")
+          no-repeat center;
+      }
+    }
+
+
+    .restaurants_button {
+      background: url("../assets/icons/standard/restaurants.png") no-repeat
+        center;
+
+
+      &.active {
+        background: url("../assets/icons/standard/restaurants_filled.png")
+          no-repeat center;
+      }
+    }
+
+    .supermarket_button {
+      background: url("../assets/icons/standard/supermarkets.png") no-repeat
+        center;
+
+
+      &.active {
+        background: url("../assets/icons/standard/supermarkets_filled.png")
+          no-repeat center;
+      }
+    }
+  }
+}

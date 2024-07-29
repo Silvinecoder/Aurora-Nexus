@@ -6,7 +6,10 @@
     <div class="detailed_card__details_container">
       <p class="detailed_card__title">{{ product.name }}</p>
 
+<<<<<<< HEAD
       <!-- Add code for displaying reviews and shopping markets here -->
+=======
+>>>>>>> main
     </div>
     <div class="detailed_card" :key="product.product_uuid">
       <Buttons :product="product" :addToCart="addToCart" :removeFromCart="removeFromCart" />

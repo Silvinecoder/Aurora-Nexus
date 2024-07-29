@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .supermarket_icons{
   width: 22px;
   height: 22px;
@@ -7,3 +8,40 @@
     height: 100%;
   }
 }
+=======
+.standard_icon {
+  width: $size-9;
+  height: $size-9;
+}
+
+.buttons_container {
+
+  .bubble_icon {
+    background: $color-white;
+    width: $size-13;
+    height: $size-13;
+    border-radius: $size-7;
+    margin-top: 3px;
+
+    svg {
+      display: flex;
+      max-height: $size-7;
+    }
+  }
+}
+
+.back_arrow {
+  width: 11px;
+  height: $size-9;
+}
+
+.supermarket_icons {
+  width: 22px;
+  height: 22px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+>>>>>>> main

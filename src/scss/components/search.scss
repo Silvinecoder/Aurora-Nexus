@@ -1,5 +1,6 @@
 .searchContainer {
   flex-grow: 4;
+<<<<<<< HEAD
   
   .searchInput {
     border-radius: 5px;
@@ -9,5 +10,23 @@
   }
   ul {
     display: none;
+=======
+}
+
+.search_button {
+  color: $color-grey-1;
+}
+
+.searchInput {
+  background: $color-white url("/icons/supermarkets/assets/search.svg") no-repeat $size-2;
+  background-size: $size-7;
+  border-radius: $size-7;
+  text-align: left;
+  padding-left: $size-15;
+  width: 100%;
+
+  &:focus::placeholder {
+    color: transparent;
+>>>>>>> main
   }
 }
