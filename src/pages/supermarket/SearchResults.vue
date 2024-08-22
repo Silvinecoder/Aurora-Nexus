@@ -1,19 +1,17 @@
 <template>
-  <!-- <div class="searchContainer">
+  <div class="searchContainer">
     <Search @update="handleSearchUpdate" />
     <div v-if="searchQuery.length" class="detailedCardContainer">
-      <DetailedCard
+      <li
         v-for="product in displayedItems"
         :key="product.product_uuid"
         :product="product"
-        :add-to-cart="addToCart"
-        :remove-from-cart="removeFromCart"
       />
     </div>
-  </div> -->
+  </div>
 </template>
 
-<!-- <script>
+<script>
 import Search from "../../components/Search.vue";
 import DetailedCard from "../../components/DetailedCard.vue";
 
@@ -31,12 +29,6 @@ export default {
       this.searchQuery = searchQuery;
       this.displayedItems = displayedItems;
     },
-    addToCart(product) {
-      this.$store.dispatch('addToCart', product.product_uuid);
-    },
-    removeFromCart(product) {
-      this.$store.dispatch('removeFromCart', product.product_uuid);
-    },
   },
 };
-</script> -->
+</script>

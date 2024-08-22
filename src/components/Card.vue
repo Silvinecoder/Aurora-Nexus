@@ -1,22 +1,40 @@
 <template>
-  <div class="image_card" :key="product.product_uuid">
-    <div class="image_card__image_button_container">
-      <img :src="product.image" :alt="product.name" />
-      <div class="detailed_card" :key="product.product_uuid">
+  <div class="card" :key="product.product_uuid">
+    <img class="product_image" :src="product.image" :alt="product.name" />
+    <div class="card_body" :key="product.product_uuid">
+      <h4 class="card_title">{{ product.name }}</h4>
+
+      <div class="price_button_container">
+        <p>{{ product.price }}</p>
         <Buttons :product="product" :addToCart="addToCart" :removeFromCart="removeFromCart" />
       </div>
-    </div>
-    <div class="image_card__title">
-      <p>{{ product.name }}</p>
+
+      <!-- <button>Review product</button> -->
+      <pre>{{ product.supermarket_uuids }}</pre>
+      <SupermarketLogo :supermarket_uuids="product.supermarket_uuids" />
     </div>
   </div>
 </template>
 
 <script>
-import Buttons from './Buttons.vue';
+import Buttons from "./Buttons.vue";
+import SupermarketLogo from "./SupermarketLogo.vue";
 
 export default {
-  components: { Buttons },
-  props: ['product', 'addToCart', 'removeFromCart'],
+  components: { Buttons, SupermarketLogo },
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+    addToCart: {
+      type: Function,
+      required: true,
+    },
+    removeFromCart: {
+      type: Function,
+      required: true,
+    },
+  },
 };
 </script>

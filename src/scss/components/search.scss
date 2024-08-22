@@ -1,6 +1,4 @@
-.searchContainer {
-  flex-grow: 4;
-}
+
 
 .search_button {
   color: $color-grey-1;
@@ -12,7 +10,8 @@
   border-radius: $size-7;
   text-align: left;
   padding-left: $size-15;
-  width: 100%;
+  width: 230px;
+  height: $size-13;
 
   &:focus::placeholder {
     color: transparent;

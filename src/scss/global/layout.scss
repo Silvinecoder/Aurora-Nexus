@@ -6,3 +6,11 @@ body {
   height: 100%;
   margin: 0;
 }
+
+.products_page_container {
+  display: flex;
+
+  .product_content {
+    flex: 1;
+  }
+}

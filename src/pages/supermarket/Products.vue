@@ -1,95 +1,88 @@
 <template>
-  <div class="product_body">
-    <div class="top_container">
-      <div class="layout_style">
+  <div class="products_page_container">
+    <SideBar />
+    <div class="product_content">
+      <div class="top_container">
         <div class="navigation">
-          <button class="search_button searchInput" @click="searchPage">
-            Search....
-          </button>
+            <Search @update="handleSearchUpdate" />
           <Buttons :goToShoppingList="true" />
         </div>
-        <Carousel @supermarket-selected="handleSupermarketSelected" />
       </div>
-    </div>
+      <Carousel @supermarket-selected="handleSupermarketSelected" />
 
-    <div class="layout_style" v-if="selectedSupermarket">
-      <div class="products__body">
-        <div class="image_cards__category_container" v-for="category in selectedCategories" :key="category.category_uuid">
-          <CategoryTitle v-if="hasProducts(category)" :categoryName="category.category_name"
-            :goToCategory="() => goToCategory(category.category_uuid)" :showButton="true" />
-          <div class="image_cards_container" v-if="hasProducts(category)">
+      <div v-if="selectedSupermarket && categoriesWithProducts.length" class="layout_style">
+        <div class="cards__category_container" v-for="category in categoriesWithProducts"
+          :key="category.category_uuid">
+          <h4 class="cards__category_title">{{ category.category_name }}</h4>
+
+          <div class="cards_container" v-if="hasProducts(category)">
             <Card v-for="product in category.products" :key="product.product_uuid" :product="product"
               :addToCart="addToCart" :removeFromCart="removeFromCart"
               :isAddedToCart="isAddedToCart(product.product_uuid)" />
           </div>
         </div>
       </div>
-    </div>
 
-    <div v-else class="no_supermarket_selected">
-      <p>Please select a supermarket</p>
+      <div v-else class="no_supermarket_selected">
+        <p>Please select a supermarket</p>
+      </div>
     </div>
   </div>
 </template>
-
 <script>
 import Buttons from "../../components/Buttons.vue";
 import Carousel from "../../components/Carousel.vue";
-import CategoryTitle from '../../components/CategoryTitle.vue';
 import Card from "../../components/Card.vue";
-import { CategoriesMixin } from '../../utils/mixins/categoriesProductsMixin.js';
-import { SupermarketsMixin } from '../../utils/mixins/supermarketsMixin.js';
+import { SupermarketsCategoriesProductsMixin } from "../../utils/mixins/supermarketsCategoriesProductsMixin";
+import SideBar from "../../components/SideBar.vue";
+import { mapGetters, mapActions } from "vuex";
+import Search from "../../components/Search.vue";
 
 export default {
-  components: { Buttons, Carousel, Card, CategoryTitle },
-  mixins: [CategoriesMixin, SupermarketsMixin],
+  components: { Buttons, Carousel, Card, SideBar, Search },
+  mixins: [SupermarketsCategoriesProductsMixin],
   data() {
     return {
       isSideBarOpen: false,
-      selectedSupermarket: null,
+      searchQuery: '',
+      displayedItems: [],
     };
   },
   computed: {
-    selectedCategories() {
-      const supermarket = this.supermarketsWithCategories.find(supermarket => supermarket.supermarket_uuid === this.selectedSupermarket?.supermarket_uuid);
-      return supermarket ? supermarket.categories : [];
+    ...mapGetters(['getSelectedSupermarket']),
+    selectedSupermarket() {
+      return this.getSelectedSupermarket;
+    },
+    categoriesWithProducts() {
+      const supermarketData = this.supermarketsWithCategories[0];
+      return supermarketData ? supermarketData.categories : [];
     }
-  },
-  watch: {
-    selectedSupermarket(newVal) {
-      if (newVal) {
-        this.fetchCategoriesAndProductsUnderSupermarket();
-      }
-    }
-  },
-  async created() {
-    await this.fetchSupermarkets();
   },
   methods: {
-    toggleSideBar() {
-      this.isSideBarOpen = !this.isSideBarOpen;
+    ...mapActions(['updateSelectedSupermarket']),
+    
+    handleSearchUpdate({ searchQuery, displayedItems }) {
+      this.searchQuery = searchQuery;
+      this.displayedItems = displayedItems;
     },
-    searchPage() {
-      this.$router.push('/supermarket/products/search');
-    },
+    
     addToCart(product) {
-      this.$store.dispatch('addToCart', product.product_uuid);
+      this.$store.dispatch('addToCart', product);
     },
     removeFromCart(product) {
-      this.$store.dispatch('removeFromCart', product.product_uuid);
+      this.$store.dispatch('removeFromCart', product);
     },
     goToCategory(categoryUUID) {
-      this.$emit('category-selected', this.categoryName);
       this.$router.push(`/supermarket/${this.selectedSupermarket.supermarket_uuid}/category/${categoryUUID}`);
     },
     isAddedToCart(productUUID) {
       return this.$store.state.cart.includes(productUUID);
     },
     handleSupermarketSelected(supermarket) {
-      this.selectedSupermarket = supermarket;
+      this.updateSelectedSupermarket(supermarket);
     },
     hasProducts(category) {
-      return category.products.length > 0;
+      return category.products && category.products.length > 0;
     }
   }
 };

@@ -1,52 +1,66 @@
 <template>
-  <!-- <div>
-    <div class="top_container">
-      <div class="layout_style">
-        <div class="navigation">
-          <Buttons :GoBack="true" />
-          <div class="searchContainer">
-            <input
-              class="searchInput"
-              type="search"
-              placeholder="Search..."
-              v-model="searchQuery"
-              id="searchBar"
-              @input="updateSearchQuery"
-              ref="searchInput"
-            />
-          </div>
-        </div>
+  <div>
+    <div class="searchContainer">
+      <input
+        class="searchInput"
+        type="search"
+        placeholder="Search..."
+        v-model="searchQuery"
+        id="searchBar"
+        @input="updateSearchQuery"
+        ref="searchInput"
+      />
+    </div>
+    <div v-if="searchQuery && displayedItems.length > 0">
+      <!-- Render the displayed items -->
+      <div v-for="item in displayedItems" :key="item.product_uuid">
+        {{ item.name }}
       </div>
     </div>
-  </div> -->
+    <div v-else-if="searchQuery">
+      <p>No products found.</p>
+    </div>
+  </div>
 </template>
-<!-- 
+
 <script>
-import Buttons from "./Buttons.vue";
-import { ProductsMixin } from "../utils/mixins/productsMixin.js";
+import { ProductsMixin } from "../utils/mixins/productsMixin";
+import Fuse from 'fuse.js';
 
 export default {
   mixins: [ProductsMixin],
-  components: {
-    Buttons,
-  },
-  mounted() {
-    this.fetchProducts().then(() => {
-      this.updateSearchQuery();
-    });
-    this.$nextTick(function () {
-      this.$refs.searchInput.focus();
-    });
-  },
   data() {
     return {
-      searchQuery: '',
-      limit: 6,
+      searchQuery: "",
+      fuse: null,
+      allProducts: [],
     };
   },
+  async mounted() {
+    await this.getProducts();
+    this.$nextTick(() => this.$refs.searchInput.focus());
+    this.initializeFuse();
+  },
+  computed: {
+    filteredItems() {
+      if (!this.searchQuery.trim()) return [];
+      const results = this.fuse.search(this.searchQuery);
+      return results.map(result => result.item);
+    },
+    displayedItems() {
+      return this.filteredItems;
+    },
+  },
   methods: {
+    initializeFuse() {
+      this.fuse = new Fuse(this.allProducts, {
+        keys: ['name'],
+        includeScore: true,
+        threshold: 0.3,
+      });
+    },
     updateSearchQuery() {
-      this.$emit('update', {
+      this.$emit("update", {
         searchQuery: this.searchQuery,
         displayedItems: this.displayedItems,
       });
@@ -55,17 +69,5 @@ export default {
       this.limit = this.filteredItems.length;
     },
   },
-  computed: {
-    filteredItems() {
-      return this.products.filter((item) => {
-        return item.name
-          .toLowerCase()
-          .includes(this.searchQuery.toLowerCase());
-      });
-    },
-    displayedItems() {
-      return this.filteredItems.slice(0, this.limit);
-    },
-  },
 };
-</script> -->
+</script>

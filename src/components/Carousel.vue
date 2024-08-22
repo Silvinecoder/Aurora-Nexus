@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import { SupermarketsMixin } from '../utils/mixins/supermarketsMixin.js';
+import { SupermarketsCategoriesProductsMixin } from '../utils/mixins/supermarketsCategoriesProductsMixin';
 
 export default {
-  mixins: [SupermarketsMixin],
+  mixins: [SupermarketsCategoriesProductsMixin],
   mounted() {
     this.fetchSupermarkets();
   },

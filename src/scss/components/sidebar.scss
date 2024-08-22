@@ -1,0 +1,13 @@
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  overflow: auto;
+  text-align: center;
+
+  img{
+    margin-top: $size-11;
+    max-width: 100%;
+    height: auto;
+  }
+}

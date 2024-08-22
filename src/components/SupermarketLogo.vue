@@ -1,16 +1,43 @@
 <template>
-  <div class="supermarket_icons">
-    <img :src="logoUrl" :alt="supermarket + ' Logo'" />
+  <div class="supermarket_logo">
+    <!-- Accordion button -->
+    <button @click="toggleContent()">
+      <span v-if="isOpen">&#9664;</span>
+      <span v-else>&#9654;</span>
+    </button>
+
+    <!-- Supermarkets logo accordion -->
+    <div v-if="isOpen" class="content">
+      <div v-for="uuid in supermarket_uuids" :key="uuid">
+        <img :src="getSupermarketImageUrl(uuid)" :alt="uuid" class="supermarket-logo" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { ProductsMixin } from "../utils/mixins/productsMixin.js";
+
 export default {
-  props: ['supermarket'],
-  computed: {
-    logoUrl() {
-      return `public/icons/supermarkets/${this.supermarket.toLowerCase()}.png`;
-    },
+  mixins: [ProductsMixin],
+  props: {
+    supermarket_uuids: {
+      type: Array,
+      required: true
+    }
   },
+  data() {
+    return {
+      isOpen: false
+    };
+  },
+  methods: {
+    toggleContent() {
+      this.isOpen = !this.isOpen;
+    },
+    getSupermarketImageUrl(supermarket_uuid) {
+      return this.getSupermarketImageUrlUuid(supermarket_uuid);
+    }
+  }
 };
 </script>
