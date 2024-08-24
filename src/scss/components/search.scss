@@ -4,7 +4,9 @@
   color: $color-grey-1;
 }
 
-.searchInput {
+.search_dropdown_container{
+  position: relative;
+.search_input {
   background: $color-white url("/icons/supermarkets/assets/search.svg") no-repeat $size-2;
   background-size: $size-7;
   border-radius: $size-7;
@@ -16,4 +18,14 @@
   &:focus::placeholder {
     color: transparent;
   }
+}
+
+.dropdown_container{
+  position: absolute;
+  right: 0;
+  background: $color-white;
+  border: 2px solid $color-grey-3;
+  border-radius: $size-12;
+  padding: $size-7 $size-9;
+}
 }

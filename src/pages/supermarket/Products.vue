@@ -4,11 +4,11 @@
     <div class="product_content">
       <div class="top_container">
         <div class="navigation">
-            <Search @update="handleSearchUpdate" />
+            <Search @update="handleSearchUpdate" :addToCart="addToCart" :removeFromCart="removeFromCart" />
           <Buttons :goToShoppingList="true" />
         </div>
       </div>
-      <Carousel @supermarket-selected="handleSupermarketSelected" />
+      <Carousel :selectedSupermarket="selectedSupermarket" @supermarket-selected="handleSupermarketSelected" />
 
       <div v-if="selectedSupermarket && categoriesWithProducts.length" class="layout_style">
         <div class="cards__category_container" v-for="category in categoriesWithProducts"
@@ -29,6 +29,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import Buttons from "../../components/Buttons.vue";
 import Carousel from "../../components/Carousel.vue";
@@ -54,6 +55,7 @@ export default {
       return this.getSelectedSupermarket;
     },
     categoriesWithProducts() {
+      // This will recompute whenever supermarketsWithCategories changes
       const supermarketData = this.supermarketsWithCategories[0];
       return supermarketData ? supermarketData.categories : [];
     }
@@ -78,8 +80,9 @@ export default {
     isAddedToCart(productUUID) {
       return this.$store.state.cart.includes(productUUID);
     },
-    handleSupermarketSelected(supermarket) {
-      this.updateSelectedSupermarket(supermarket);
+    async handleSupermarketSelected(supermarket) {
+      await this.updateSelectedSupermarket(supermarket);  // Ensure async action completes before proceeding
+      await this.loadCategoriesAndProducts();  // Load the categories and products for the selected supermarket
     },
     hasProducts(category) {
       return category.products && category.products.length > 0;

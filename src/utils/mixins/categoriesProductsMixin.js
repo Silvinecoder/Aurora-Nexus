@@ -1,9 +1,7 @@
 import { fetchData } from '../../api/api';
 import { mapGetters } from 'vuex';
-import { SupermarketsMixin } from './supermarketsMixin';
 
 export const CategoriesProductsMixin = {
-  mixins: [SupermarketsMixin],
   data() {
     return {
       supermarketsWithCategories: [],

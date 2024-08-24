@@ -4,7 +4,7 @@
       class="carousel"
       v-for="supermarket in supermarkets"
       :key="supermarket.supermarket_uuid"
-      @click="selectSupermarket(supermarket)"
+      @click="$emit('supermarket-selected', supermarket)"
       :class="{ 'not-selected': selectedSupermarket && selectedSupermarket.supermarket_uuid !== supermarket.supermarket_uuid }"
     >
       <img :src="getSupermarketImageUrl(supermarket.supermarket_name)" :alt="supermarket.supermarket_name">
@@ -17,6 +17,9 @@ import { SupermarketsCategoriesProductsMixin } from '../utils/mixins/supermarket
 
 export default {
   mixins: [SupermarketsCategoriesProductsMixin],
+  props: {
+    selectedSupermarket: Object, 
+  },
   mounted() {
     this.fetchSupermarkets();
   },

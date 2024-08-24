@@ -1,24 +1,68 @@
 // CARDS COMPONENTS
 
-// Global Cards
-.detailed_cards__category_container,
-.cards__category_container {
-  .product_image {
-    display: block;
-    width: 200px;
-    height: auto;
-    object-fit: cover;
-    margin-left: auto;
-    margin-right: auto;
-  }
+// Global Items
+.product_image {
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
 
-  .cards__category_title {
-    font-size: $font-size-7;
-    margin: $size-9 0 $size-12 0;
+.cards__category_title {
+  font-size: $font-size-7;
+  margin: $size-9 0 $size-12 0;
+}
+
+button {
+  margin: 0;
+  max-width: $size-12;
+  max-height: $size-12;
+  svg {
+    width: $size-12;
+    height: $size-12;
   }
 }
 
-// Image Card
+.price_button_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Horizontal Cards
+.horizontal_card_container {
+  margin-bottom: 31px;
+  .horizontal_card {
+    display: flex;
+
+    .product_image {
+      width: 117px;
+      margin-right: 22px;
+    }
+
+    .card_body {
+      width: 158px;
+
+      .price_button_container {
+        margin: 22px 0;
+      }
+
+      .supermarket_logo {
+        .content {
+          display: flex;
+          img {
+            width: $size-8;
+            height: $size-8;
+          }
+        }
+      }
+    }
+  }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+// Cards
 .cards__category_container {
   margin-bottom: $size-9;
 
@@ -39,10 +83,12 @@
       width: 100%;
       padding-top: $size-7;
 
-      .product_image{
-        border: 2px solid #EFEFEF;
+      .product_image {
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 2px solid #efefef;
       }
-
 
       .card_body {
         padding: $size-9 $size-7;
@@ -51,25 +97,9 @@
           text-overflow: ellipsis;
         }
 
-        .price_button_container {
+        .supermarket_logo {
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          
-          button {
-            margin: 0;
-            max-width: $size-12;
-            max-height: $size-12;
-            svg {
-              width: $size-12;
-              height: $size-12;
-            }
-          }
-        }
-
-        .supermarket_logo{
-          display: flex;
-          img{
+          img {
             width: $size-8;
             height: $size-8;
           }

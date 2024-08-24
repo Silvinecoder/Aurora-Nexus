@@ -1,5 +1,5 @@
 <template>
-  <div class="searchContainer">
+  <div class="search_container">
     <Search @update="handleSearchUpdate" />
     <div v-if="searchQuery.length" class="detailedCardContainer">
       <li

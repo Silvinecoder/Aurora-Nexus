@@ -1,5 +1,5 @@
 import { fetchData } from '../../api/api';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export const SupermarketsCategoriesProductsMixin = {
   data() {
@@ -24,6 +24,8 @@ export const SupermarketsCategoriesProductsMixin = {
     },
   },
   methods: {
+    ...mapActions(['updateSelectedSupermarket']),
+
     async fetchSupermarkets() {
       try {
         this.supermarkets = await fetchData('/supermarkets');
@@ -31,6 +33,7 @@ export const SupermarketsCategoriesProductsMixin = {
         console.error('Failed to fetch supermarkets:', error);
       }
     },
+
     async loadCategoriesAndProducts() {
       const selectedSupermarket = this.getSelectedSupermarket;
 
@@ -63,6 +66,11 @@ export const SupermarketsCategoriesProductsMixin = {
         throw error;
       }
     },
+
+    selectSupermarket(supermarket) {
+      this.updateSelectedSupermarket(supermarket);
+    },
+
     getSupermarketImageUrl(supermarket_name) {
       const imageMap = {
         'Continente': '/icons/supermarkets/stores/continente.png',
@@ -71,14 +79,6 @@ export const SupermarketsCategoriesProductsMixin = {
         'Mercadona': '/icons/supermarkets/stores/mercadona.png',
       };
       return imageMap[supermarket_name] || '/icons/supermarkets/stores/default.png';
-    },
-    getSupermarketImageUrlUuid(supermarket_uuid) {
-      const imageMap = {
-        'c3dc5c28-afc4-4680-9fd6-b39132f82612': '/icons/supermarkets/stores/continente.png',
-        'fadf51d4-30c4-42f8-82e5-6ce8bb6c7fb3': '/icons/supermarkets/stores/pingo_doce.png',
-        '058e6b43-4b66-4b7f-b18a-b861830a1703': '/icons/supermarkets/stores/auchan.png',
-      };
-      return imageMap[supermarket_uuid] || '/icons/supermarkets/stores/default.png';
     },
   },
 };

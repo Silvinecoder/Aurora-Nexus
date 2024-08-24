@@ -1,5 +1,5 @@
 <template>
-  <div class="supermarket_logo">
+  <div class="supermarket_logo" :class="supermarketLogoClass">
     <!-- Accordion button -->
     <button @click="toggleContent()">
       <span v-if="isOpen">&#9664;</span>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { ProductsMixin } from "../utils/mixins/productsMixin.js";
+import { ProductsMixin } from "../utils/mixins/productsMixin";
 
 export default {
   mixins: [ProductsMixin],
@@ -30,6 +30,14 @@ export default {
     return {
       isOpen: false
     };
+  },
+  computed: {
+    supermarketLogoClass() {
+      return {
+        supermarket_logo: true,
+        "supermarket_logo--open": this.isOpen
+      };
+    }
   },
   methods: {
     toggleContent() {
