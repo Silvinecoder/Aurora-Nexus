@@ -4,21 +4,22 @@
     <div class="product_content">
       <div class="top_container">
         <div class="navigation">
-            <Search @update="handleSearchUpdate" :addToCart="addToCart" :removeFromCart="removeFromCart" />
+          <Search />
           <Buttons :goToShoppingList="true" />
         </div>
       </div>
       <Carousel :selectedSupermarket="selectedSupermarket" @supermarket-selected="handleSupermarketSelected" />
 
       <div v-if="selectedSupermarket && categoriesWithProducts.length" class="layout_style">
-        <div class="cards__category_container" v-for="category in categoriesWithProducts"
-          :key="category.category_uuid">
-          <h4 class="cards__category_title">{{ category.category_name }}</h4>
+        <div class="cards__category_container" v-for="category in categoriesWithProducts" :key="category.category_uuid">
+
+          <div class="cards__category_title__button__container">
+            <h4 class="cards__category_title">{{ category.category_name }}</h4>
+            <router-link :to="getCategoryLink(category.category_uuid)">See all</router-link>
+          </div>
 
           <div class="cards_container" v-if="hasProducts(category)">
-            <Card v-for="product in category.products" :key="product.product_uuid" :product="product"
-              :addToCart="addToCart" :removeFromCart="removeFromCart"
-              :isAddedToCart="isAddedToCart(product.product_uuid)" />
+            <Card v-for="product in category.products" :key="product.product_uuid" :product="product" />
           </div>
         </div>
       </div>
@@ -45,7 +46,6 @@ export default {
   data() {
     return {
       isSideBarOpen: false,
-      searchQuery: '',
       displayedItems: [],
     };
   },
@@ -58,28 +58,15 @@ export default {
       // This will recompute whenever supermarketsWithCategories changes
       const supermarketData = this.supermarketsWithCategories[0];
       return supermarketData ? supermarketData.categories : [];
-    }
+    },
+    getCategoryLink() {
+      return (categoryUUID) => {
+        return `/supermarket/${this.selectedSupermarket.supermarket_uuid}/category/${categoryUUID}`;
+      };
+    },
   },
   methods: {
     ...mapActions(['updateSelectedSupermarket']),
-    
-    handleSearchUpdate({ searchQuery, displayedItems }) {
-      this.searchQuery = searchQuery;
-      this.displayedItems = displayedItems;
-    },
-    
-    addToCart(product) {
-      this.$store.dispatch('addToCart', product);
-    },
-    removeFromCart(product) {
-      this.$store.dispatch('removeFromCart', product);
-    },
-    goToCategory(categoryUUID) {
-      this.$router.push(`/supermarket/${this.selectedSupermarket.supermarket_uuid}/category/${categoryUUID}`);
-    },
-    isAddedToCart(productUUID) {
-      return this.$store.state.cart.includes(productUUID);
-    },
     async handleSupermarketSelected(supermarket) {
       await this.updateSelectedSupermarket(supermarket);  // Ensure async action completes before proceeding
       await this.loadCategoriesAndProducts();  // Load the categories and products for the selected supermarket

@@ -6,7 +6,12 @@
 
       <div class="price_button_container">
         <p>{{ product.price }}</p>
-        <Buttons :product="product" :addToCart="addToCart" :removeFromCart="removeFromCart" />
+        <Buttons 
+          :product="product" 
+          :addToCart="addToCart" 
+          :removeFromCart="removeFromCart" 
+          :isAddedToCart="isAddedToCart"
+        />
       </div>
 
       <SupermarketLogo :supermarket_uuids="product.supermarket_uuids" />
@@ -31,6 +36,10 @@ export default {
     },
     removeFromCart: {
       type: Function,
+      required: true,
+    },
+    isAddedToCart: {
+      type: Boolean,
       required: true,
     },
   },

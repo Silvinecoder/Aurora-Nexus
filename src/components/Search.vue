@@ -5,37 +5,38 @@
         @input="updateSearchQuery" ref="searchInput" />
     </div>
     <div class="dropdown_container" v-if="searchQuery && displayedItems.length > 0">
-      <button @click="closeDropdown" class="close_button">Close</button>
+      <Button :closeButton="closeDropdown" />
       <div class="horizontal_card_container" v-for="item in displayedItems" :key="item.product_uuid">
-        <HorizontalCard :product="item" :addToCart="addToCart" :removeFromCart="removeFromCart" />
+        <HorizontalCard :product="item" :addToCart="addToCart" :removeFromCart="removeFromCart" :isAddedToCart="isProductInCart(item.product_uuid)" />
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import { ProductsMixin } from '../utils/mixins/productsMixin';
 import Fuse from 'fuse.js';
 import HorizontalCard from './HorizontalCard.vue';
+import Button from './Buttons.vue';
 
 export default {
-  components: { HorizontalCard },
+  components: { HorizontalCard, Button },
   mixins: [ProductsMixin],
-  props: {
-    addToCart: Function,
-    removeFromCart: Function,
-  },
   data() {
     return {
-      searchQuery: "",
+      searchQuery: '',
       fuse: null,
       allProducts: [],
+      isDropdownOpen: false,
     };
   },
   async mounted() {
     await this.getProducts();
     this.$nextTick(() => this.$refs.searchInput.focus());
     this.initializeFuse();
+    document.addEventListener('mousedown', this.handleClickOutside);
+  },
+  beforeDestroy() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
   },
   computed: {
     filteredItems() {
@@ -61,12 +62,35 @@ export default {
         displayedItems: this.displayedItems,
       });
     },
+    handleSearchUpdate({ searchQuery, displayedItems }) {
+      this.searchQuery = searchQuery;
+      this.displayedItems = displayedItems;
+    },
     closeDropdown() {
       this.searchQuery = '';
+      this.isDropdownOpen = false;
     },
     showMore() {
       this.limit = this.filteredItems.length;
     },
+    isProductInCart(productUUID) {
+      return this.$store.state.cart.some(item => item.product_uuid === productUUID);
+    },
+    addToCart(product) {
+      this.$store.dispatch('addToCart', product);
+    },
+    removeFromCart(product) {
+      this.$store.dispatch('removeFromCart', product);
+    },
+    handleClickOutside(event) {
+      const dropdown = this.$el.querySelector('.dropdown_container');
+      const searchInput = this.$refs.searchInput;
+      
+      // Check if the click is outside the dropdown and the search input
+      if (dropdown && !dropdown.contains(event.target) && searchInput && !searchInput.contains(event.target)) {
+        this.closeDropdown();
+      }
+    }
   },
 };
 </script>

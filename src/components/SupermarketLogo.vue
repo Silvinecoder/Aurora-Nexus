@@ -8,15 +8,13 @@
 
     <!-- Supermarkets logo accordion -->
     <div v-if="isOpen" class="content">
-      <div v-for="uuid in supermarket_uuids" :key="uuid">
-        <img :src="getSupermarketImageUrl(uuid)" :alt="uuid" class="supermarket-logo" />
-      </div>
+        <img v-for="uuid in supermarket_uuids" :key="uuid" :src="getSupermarketImageUrl(uuid)" :alt="uuid" class="supermarket-logo" />
     </div>
   </div>
 </template>
 
 <script>
-import { ProductsMixin } from "../utils/mixins/productsMixin";
+import { ProductsMixin } from '../utils/mixins/productsMixin';
 
 export default {
   mixins: [ProductsMixin],

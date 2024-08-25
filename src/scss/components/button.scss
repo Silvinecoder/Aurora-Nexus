@@ -1,5 +1,61 @@
-.button-xl{
-  background-color: $color-dark-green;
-  width: 21.438rem;
-  height: 3.25rem;
+.standard_icon {
+  width: $size-9;
+  height: $size-9;
+}
+
+.buttons_container {
+  .bubble_icon {
+    background: $color-white;
+    width: $size-13;
+    height: $size-13;
+    border-radius: $size-7;
+    margin-top: 3px;
+
+    svg {
+      display: flex;
+      max-height: $size-7;
+    }
+  }
+}
+
+.back_arrow {
+  width: 11px;
+  height: $size-9;
+}
+
+.supermarket_icons {
+  width: 22px;
+  height: 22px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+//Dropdown Buttons
+
+.dropdown_container{
+  button{
+    max-width: 14px;
+    max-height: 14px;
+
+    svg{
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+}
+
+.horizontal_card_container {
+  button {
+    margin: 0;
+    max-width: $size-12;
+    max-height: $size-12;
+    svg {
+      width: $size-12;
+      height: $size-12;
+    }
+  }
 }

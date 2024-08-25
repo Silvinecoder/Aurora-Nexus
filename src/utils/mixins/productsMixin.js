@@ -11,7 +11,6 @@ export const ProductsMixin = {
       try {
         const products = await fetchData('/products');
         this.allProducts = products;
-        console.log('Loaded All Products:', this.allProducts);
       } catch (error) {
         console.error('Failed to fetch all products:', error.message);
       }

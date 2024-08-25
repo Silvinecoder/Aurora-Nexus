@@ -12,11 +12,10 @@
 </template>
 
 <script>
-import Buttons from "./Buttons.vue";
 import SupermarketLogo from "./SupermarketLogo.vue";
 
 export default {
-  components: { Buttons, SupermarketLogo },
+  components: { SupermarketLogo },
   props: {
     product: {
       type: Object,

@@ -8,7 +8,13 @@ export default createStore({
   },
   mutations: {
     addToCart(state, product) {
-      state.cart.push(product);
+      const isProductInCart = state.cart.some(
+        (item) => item.product_uuid === product.product_uuid
+      );
+  
+      if (!isProductInCart) {
+        state.cart.push(product);
+      }
     },
     removeFromCart(state, product) {
       state.cart = state.cart.filter(
@@ -19,11 +25,9 @@ export default createStore({
       state.cart = [];
     },
     setSelectedCategory(state, category) {
-      console.log("Setting selected category in store:", category);
       state.selectedCategory = category;
     },
     setSelectedSupermarket(state, supermarket) {
-      console.log("Setting selected supermarket in store:", supermarket);
       state.selectedSupermarket = supermarket;
     },
   },
@@ -38,16 +42,17 @@ export default createStore({
       commit("clearCart");
     },
     updateSelectedCategory({ commit }, category) {
-      console.log("Updating selected category in store:", category);
       commit("setSelectedCategory", category);
     },
     updateSelectedSupermarket({ commit }, supermarket) {
-      console.log("Updating selected supermarket in store:", supermarket);
       commit("setSelectedSupermarket", supermarket);
     },
   },
   getters: {
     getSelectedSupermarket: (state) => state.selectedSupermarket,
     getSelectedCategory: (state) => state.selectedCategory,
+    isProductInCart: (state) => (product_uuid) => {
+      return state.cart.some(item => item.product_uuid === product_uuid);
+    },
   },
 });

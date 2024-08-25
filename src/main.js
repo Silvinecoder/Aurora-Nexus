@@ -6,19 +6,18 @@ import store from "./utils/store/index";
 
 // Import your components for routing
 import Home from "../src/pages/Home.vue";
-import Products from "../src/pages/supermarket/Products.vue";
-import Search from "./pages/supermarket/SearchResults.vue";
+import SupermarketsPage from "./pages/supermarket/Supermarkets.vue";
 import ShoppingList from "../src/pages/supermarket/ShoppingList.vue";
+import categoryPage from "../src/pages/supermarket/Category.vue";
 
 // Create a router instance
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/home", component: Home },
-    { path: "/supermarket/products", component: Products },
-    { path: "/supermarket/products/search", component: Search },
+    { path: "/supermarkets", component: SupermarketsPage },
     { path: "/supermarket/shopping-list", component: ShoppingList },
-    // Add more routes as needed
+    { path: "/supermarket/:supermarket_uuid/category/:category_uuid", component: categoryPage},
   ],
 });
 
