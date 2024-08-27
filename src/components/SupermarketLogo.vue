@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { ProductsMixin } from '../utils/mixins/productsMixin';
+import { ProductsMixin } from '@/utils/mixins/productsMixin';
 
 export default {
   mixins: [ProductsMixin],

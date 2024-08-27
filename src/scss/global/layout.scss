@@ -1,5 +1,6 @@
 .layout_style {
-  margin: 0 $size-9;
+  width: 100%;
+  // max-width: 1030px;
 }
 
 body {
@@ -7,10 +8,15 @@ body {
   margin: 0;
 }
 
-.products_page_container {
+.page_container {
   display: flex;
 
-  .product_content {
+  .content {
     flex: 1;
   }
+}
+
+.products__body{
+  margin-top: $size-12;
+  margin-bottom: $size-28;
 }

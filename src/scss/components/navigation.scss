@@ -9,8 +9,10 @@
   position: relative;
 
   .navigation {
-    padding: 26px 28px 26px 28px;
+    padding: $size-10 $size-11 $size-10 $size-19;
     display: flex;
     justify-content: space-between;
+    max-width: 1080px;
+    width: 100%;
   }
 }

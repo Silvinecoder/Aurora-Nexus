@@ -1,8 +1,5 @@
-.title_and_delete{
-  display: flex;
-  justify-content: space-between;
 
-  button{
+ .shopping_list__delete{
     background-color: $color-white;
     padding: 4px $size-1;
     border-radius: $size-7;
@@ -10,7 +7,7 @@
     color: $color-dark-green;
     font-weight: 500;
   }
-}
+
 
 .check_list{
   display: flex;

@@ -1,35 +1,34 @@
 <template>
-  <div>
-    <div class="top_container">
-      <div class="layout_style">
-        <div class="navigation">
-          <Search />
-        </div>
-        <div class="title_and_delete">
-          <h3>Shopping List</h3>
-          <button>Delete all</button>
+  <div class="page_container">
+    <SideBar />
+    <div class="content">
+      <div class="top_container">
+        <div class="layout_style">
+          <div class="navigation">
+            <Search />
+          </div>
         </div>
       </div>
-    </div>
+      <button class="shopping_list__delete" @click="clearCart">Delete all</button>
 
-    <div class="check_list" v-if="cartIsEmpty">Your shopping list is empty.</div>
-    <div v-else>
-      <!-- Loop over each product and pass it to the Card component -->
-      <Card v-for="product in products" :key="product.product_uuid" :product="product" />
-      <button @click="clearCart">Clear Cart</button>
+      <div class="check_list" v-if="cartIsEmpty">Your shopping list is empty.</div>
+      <div class="horizontal_card__shopping_list" v-else>
+        <HorizontalCard v-for="product in products" :key="product.product_uuid" :product="product" :addToCart="addToCart" :removeFromCart="removeFromCart" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { fetchData } from '../../api/api';
+import { fetchData } from '@/api/api';
 import { mapState, mapActions } from 'vuex';
-import Buttons from "../../components/Buttons.vue";
-import Search from "../../components/Search.vue";
-import Card from "../../components/Card.vue";
+import Buttons from "@/components/Buttons.vue";
+import Search from "@/components/Search.vue";
+import HorizontalCard from "@/components/HorizontalCard.vue";
+import SideBar from "@/components/SideBar.vue";
 
 export default {
-  components: { Buttons, Search, Card },
+  components: { Buttons, Search, HorizontalCard, SideBar },
 
   computed: {
     ...mapState({
@@ -43,8 +42,8 @@ export default {
     ...mapActions(['clearCart']),
     async fetchCartData() {
       try {
-        const data = await fetchData(); // Call the fetchData function
-        // Process the fetched data...
+        const data = await fetchData();
+        return data;
       } catch (error) {
         console.error(error);
       }

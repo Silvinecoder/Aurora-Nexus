@@ -11,13 +11,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
+
   .cards__category_title {
     font-size: $font-size-7;
     margin: $size-9 0 $size-12 0;
   }
 
-  a{
+  a {
     height: auto;
   }
 }
@@ -26,48 +26,62 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: $size-7;
+
+  p {
+    color: $color-grey-4;
+  }
 }
 
 // Horizontal Cards
 .horizontal_card_container {
   margin-bottom: 31px;
-  .horizontal_card {
-    display: flex;
+  border-bottom: 1px solid $color-grey-3;
 
-    .product_image {
-      width: 117px;
-      margin-right: 22px;
-    }
-
-    .card_body {
-      width: 158px;
-
-      .price_button_container {
-        margin: 22px 0;
-      }
-
-      .supermarket_logo {
-        display: flex;
-
-        .content {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-
-          img {
-            width: 100%;
-            height: 100%;
-            max-width: $size-8;
-            max-height: $size-8;
-            height: auto;
-            object-fit: cover;
-          }
-        }
-      }
-    }
+  .card_body {
+    width: 158px;
   }
+
   &:last-of-type {
     margin-bottom: 0;
+  }
+}
+
+.horizontal_card__shopping_list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.horizontal_card {
+  display: flex;
+
+  .product_image {
+    width: 117px;
+    margin-right: 22px;
+  }
+
+  .price_button_container {
+    margin: 22px 0;
+  }
+
+  .supermarket_logo {
+    display: flex;
+
+    .content {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        max-width: $size-8;
+        max-height: $size-8;
+        height: auto;
+        object-fit: cover;
+      }
+    }
   }
 }
 
@@ -100,11 +114,7 @@
       }
 
       .card_body {
-        padding: $size-9 $size-7;
-
-        .card_title {
-          text-overflow: ellipsis;
-        }
+        padding: $size-9 $size-7 $size-4 $size-7;
 
         .supermarket_logo {
           display: flex;

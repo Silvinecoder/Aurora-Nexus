@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import SupermarketLogo from "./SupermarketLogo.vue";
+import SupermarketLogo from "@/components/SupermarketLogo.vue";
 
 export default {
   components: { SupermarketLogo },

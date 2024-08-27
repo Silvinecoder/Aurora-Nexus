@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { SupermarketsCategoriesProductsMixin } from '../utils/mixins/supermarketsCategoriesProductsMixin';
+import { SupermarketsCategoriesProductsMixin } from '@/utils/mixins/supermarketsCategoriesProductsMixin';
 
 export default {
   mixins: [SupermarketsCategoriesProductsMixin],

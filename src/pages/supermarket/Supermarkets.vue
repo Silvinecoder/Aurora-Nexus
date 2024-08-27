@@ -1,44 +1,49 @@
 <template>
-  <div class="products_page_container">
+  <div class="page_container">
     <SideBar />
-    <div class="product_content">
+    <div class="content">
       <div class="top_container">
         <div class="navigation">
           <Search />
           <Buttons :goToShoppingList="true" />
         </div>
       </div>
-      <Carousel :selectedSupermarket="selectedSupermarket" @supermarket-selected="handleSupermarketSelected" />
 
-      <div v-if="selectedSupermarket && categoriesWithProducts.length" class="layout_style">
-        <div class="cards__category_container" v-for="category in categoriesWithProducts" :key="category.category_uuid">
+      <div class="layout_style">
+        <Carousel :selectedSupermarket="selectedSupermarket" @supermarket-selected="handleSupermarketSelected" />
 
-          <div class="cards__category_title__button__container">
-            <h4 class="cards__category_title">{{ category.category_name }}</h4>
-            <router-link :to="getCategoryLink(category.category_uuid)">See all</router-link>
-          </div>
+        <div v-if="selectedSupermarket && categoriesWithProducts.length">
+          <div class="cards__category_container" v-for="category in categoriesWithProducts"
+            :key="category.category_uuid">
 
-          <div class="cards_container" v-if="hasProducts(category)">
-            <Card v-for="product in category.products" :key="product.product_uuid" :product="product" />
+            <div class="cards__category_title__button__container">
+              <h4 class="cards__category_title">{{ category.category_name }}</h4>
+              <router-link :to="getCategoryLink(category.category_uuid)">See all</router-link>
+            </div>
+
+            <div class="cards_container" v-if="hasProducts(category)">
+              <Card v-for="product in category.products" :key="product.product_uuid" :product="product" />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div v-else class="no_supermarket_selected">
-        <p>Please select a supermarket</p>
+
+        <div v-else class="no_supermarket_selected">
+          <p>Please select a supermarket</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Buttons from "../../components/Buttons.vue";
-import Carousel from "../../components/Carousel.vue";
-import Card from "../../components/Card.vue";
-import { SupermarketsCategoriesProductsMixin } from "../../utils/mixins/supermarketsCategoriesProductsMixin";
-import SideBar from "../../components/SideBar.vue";
+import Buttons from "@/components/Buttons.vue";
+import Carousel from "@/components/Carousel.vue";
+import Card from "@/components/Card.vue";
+import { SupermarketsCategoriesProductsMixin } from "@/utils/mixins/supermarketsCategoriesProductsMixin";
+import SideBar from "@/components/SideBar.vue";
 import { mapGetters, mapActions } from "vuex";
-import Search from "../../components/Search.vue";
+import Search from "@/components/Search.vue";
 
 export default {
   components: { Buttons, Carousel, Card, SideBar, Search },

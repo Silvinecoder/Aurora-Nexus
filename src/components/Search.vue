@@ -13,10 +13,10 @@
   </div>
 </template>
 <script>
-import { ProductsMixin } from '../utils/mixins/productsMixin';
+import { ProductsMixin } from '@/utils/mixins/productsMixin';
 import Fuse from 'fuse.js';
-import HorizontalCard from './HorizontalCard.vue';
-import Button from './Buttons.vue';
+import HorizontalCard from '@/components/HorizontalCard.vue';
+import Button from '@/components/Buttons.vue';
 
 export default {
   components: { HorizontalCard, Button },
@@ -86,7 +86,6 @@ export default {
       const dropdown = this.$el.querySelector('.dropdown_container');
       const searchInput = this.$refs.searchInput;
       
-      // Check if the click is outside the dropdown and the search input
       if (dropdown && !dropdown.contains(event.target) && searchInput && !searchInput.contains(event.target)) {
         this.closeDropdown();
       }
