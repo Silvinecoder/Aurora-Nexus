@@ -1,7 +1,12 @@
 <template>
   <div class="buttons_container">
+    <!-- Home button -->
+    <button class="home_button" v-if="goHomeButton" @click="goHome">
+      <img src="/src/assets/global/san-logo.png" alt="San logo">
+    </button>
+
     <!-- Back Arrow Button -->
-    <button class="back_arrow standard_icon" v-if="GoBack" @click="goBack">
+    <button class="standard_icon back_arrow" v-if="goBackButton" @click="goBack">
       <svg>
         <use xlink:href="../assets/icons/supermarket/back-arrow.svg#back_arrow__icon"></use>
       </svg>
@@ -11,13 +16,6 @@
     <button class="standard_icon bubble_icon" v-if="goToShoppingList" @click="shoppingList">
       <svg>
         <use xlink:href="/icons/supermarkets/assets/list.svg#list__icon"></use>
-      </svg>
-    </button>
-
-    <!-- Burger Button -->
-    <button class="standard_icon burger_button" v-if="BurgerButton">
-      <svg>
-        <use xlink:href="../assets/icons/standard/burgerButton.svg#burger_button__icon"></use>
       </svg>
     </button>
 
@@ -41,17 +39,34 @@
         <use xlink:href="../assets/icons/supermarket/close-icon.svg#close__icon"></use>
       </svg>
     </button>
+
+    <!-- See All button-->
+    <button class="see_all__button" v-if="seeAllButton">
+      <svg>
+        <use xlink:href="../assets/icons/supermarket/see-all.svg#see_all__icon"></use>
+      </svg>
+      <p>See All</p>
+    </button>
+
+    <!-- See Less button-->
+    <button class="see_less__button"  v-if="seeLessButton">
+      <svg>
+        <use xlink:href="../assets/icons/supermarket/see-less.svg#see_less__icon"></use>
+      </svg>
+      <p>See Less</p>
+    </button>
+
+    <!-- Delete Cart Button -->
+    <button class="shopping_list__delete" @click="clearCart" v-if="clearCart">
+      Delete All
+    </button>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    BurgerButton: {
-      type: Boolean,
-      default: false,
-    },
-    GoBack: {
+    goBackButton: {
       type: Boolean,
       default: false,
     },
@@ -59,7 +74,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    goToCategory: {
+    goHomeButton: {
       type: Boolean,
       default: false,
     },
@@ -79,7 +94,19 @@ export default {
       type: Boolean,
       required: false,
     },
+    seeAllButton: {
+      type: Boolean,
+      default: false,
+    },
+    seeLessButton: {
+      type: Boolean,
+      default: false,
+    },
     closeButton: {
+      type: Function,
+      required: false,
+    },
+    clearCart: {
       type: Function,
       required: false,
     },
@@ -87,6 +114,9 @@ export default {
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    goHome() {
+      this.$router.push('/');
     },
     shoppingList() {
       this.$router.push('/supermarket/shopping-list');

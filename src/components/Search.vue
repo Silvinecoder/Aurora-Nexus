@@ -4,10 +4,10 @@
       <input class="search_input" type="search" placeholder="Search..." v-model="searchQuery" id="searchBar"
         @input="updateSearchQuery" ref="searchInput" />
     </div>
-    <div class="dropdown_container" v-if="searchQuery && displayedItems.length > 0">
+    <div class="dropdown_container" v-if="searchQuery && displayedProducts.length > 0">
       <Button :closeButton="closeDropdown" />
-      <div class="horizontal_card_container" v-for="item in displayedItems" :key="item.product_uuid">
-        <HorizontalCard :product="item" :addToCart="addToCart" :removeFromCart="removeFromCart" :isAddedToCart="isProductInCart(item.product_uuid)" />
+      <div class="horizontal_card_container" v-for="product in displayedProducts" :key="product.product_uuid">
+        <HorizontalCard :product="product" :isAddedToCart="isProductInCart(product.product_uuid)" :addToCart="addToCart" :removeFromCart="removeFromCart" />
       </div>
     </div>
   </div>
@@ -17,6 +17,7 @@ import { ProductsMixin } from '@/utils/mixins/productsMixin';
 import Fuse from 'fuse.js';
 import HorizontalCard from '@/components/HorizontalCard.vue';
 import Button from '@/components/Buttons.vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: { HorizontalCard, Button },
@@ -39,16 +40,18 @@ export default {
     document.removeEventListener('mousedown', this.handleClickOutside);
   },
   computed: {
+    ...mapGetters(['isProductInCart']),
     filteredItems() {
       if (!this.searchQuery.trim()) return [];
       const results = this.fuse.search(this.searchQuery);
       return results.map(result => result.item);
     },
-    displayedItems() {
+    displayedProducts() {
       return this.filteredItems;
     },
   },
   methods: {
+    ...mapActions(['addToCart', 'removeFromCart']),
     initializeFuse() {
       this.fuse = new Fuse(this.allProducts, {
         keys: ['name'],
@@ -59,12 +62,12 @@ export default {
     updateSearchQuery() {
       this.$emit("update", {
         searchQuery: this.searchQuery,
-        displayedItems: this.displayedItems,
+        displayedProducts: this.displayedProducts,
       });
     },
-    handleSearchUpdate({ searchQuery, displayedItems }) {
+    handleSearchUpdate({ searchQuery, displayedProducts }) {
       this.searchQuery = searchQuery;
-      this.displayedItems = displayedItems;
+      this.displayedProducts = displayedProducts;
     },
     closeDropdown() {
       this.searchQuery = '';
@@ -72,15 +75,6 @@ export default {
     },
     showMore() {
       this.limit = this.filteredItems.length;
-    },
-    isProductInCart(productUUID) {
-      return this.$store.state.cart.some(item => item.product_uuid === productUUID);
-    },
-    addToCart(product) {
-      this.$store.dispatch('addToCart', product);
-    },
-    removeFromCart(product) {
-      this.$store.dispatch('removeFromCart', product);
     },
     handleClickOutside(event) {
       const dropdown = this.$el.querySelector('.dropdown_container');

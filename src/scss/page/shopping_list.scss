@@ -8,9 +8,13 @@
     font-weight: 500;
   }
 
-
 .check_list{
   display: flex;
   justify-content: center;
   align-content: center;
+}
+
+.shopping_list_header{
+  display: flex;
+  justify-content: space-between;
 }

@@ -8,7 +8,6 @@ import store from "./utils/store/index";
 import Home from "../src/pages/Home.vue";
 import SupermarketsPage from "./pages/supermarket/Supermarkets.vue";
 import ShoppingList from "../src/pages/supermarket/ShoppingList.vue";
-import categoryPage from "../src/pages/supermarket/Category.vue";
 
 // Create a router instance
 const router = createRouter({
@@ -17,7 +16,6 @@ const router = createRouter({
     { path: "/home", component: Home },
     { path: "/supermarkets", component: SupermarketsPage },
     { path: "/supermarket/shopping-list", component: ShoppingList },
-    { path: "/supermarket/:supermarket_uuid/category/:category_uuid", component: categoryPage},
   ],
 });
 

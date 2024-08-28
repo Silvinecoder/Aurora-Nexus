@@ -1,5 +1,13 @@
 <template>
   <div class="sidebar">
-    <img src="/src/assets/global/san-logo.png" alt="san logo">
+    <Button :goHomeButton="true"></Button>
   </div>
 </template>
+
+<script>
+import Button from "@/components/Buttons.vue";
+
+export default {
+  components: { Button },
+};
+</script>

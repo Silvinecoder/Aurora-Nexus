@@ -6,20 +6,38 @@
 
       <div class="price_button_container">
         <p>{{ product.price }}</p>
+        <Button 
+          :product="product" 
+          :isAddedToCart="isAddedToCart"
+          :addToCart="addToCart" 
+          :removeFromCart="removeFromCart" 
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import SupermarketLogo from "@/components/SupermarketLogo.vue";
+import Button from "@/components/Buttons.vue";
 
 export default {
-  components: { SupermarketLogo },
+  components: { Button },
   props: {
     product: {
       type: Object,
       required: true,
+    },
+    isAddedToCart: {
+      type: Boolean,
+      required: false,
+    },
+    addToCart: {
+      type: Function,
+      required: false,
+    },
+    removeFromCart: {
+      type: Function,
+      required: false,
     },
   },
 };

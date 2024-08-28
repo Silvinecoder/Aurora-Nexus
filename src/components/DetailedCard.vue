@@ -8,7 +8,7 @@
 
     </div>
     <div class="detailed_card" :key="product.product_uuid">
-      <Buttons :product="product" :addToCart="addToCart" :removeFromCart="removeFromCart" />
+      <Button :product="product" :addToCart="addToCart" :removeFromCart="removeFromCart" />
     </div>
   </div>
   <hr class="detailed_card_hr" />
@@ -16,10 +16,10 @@
 
 <script>
 import SupermarketLogo from '@/components/SupermarketLogo.vue';
-import Buttons from '@/components/Buttons.vue';
+import Button from '@/components/Buttons.vue';
 
 export default {
-  components: { SupermarketLogo, Buttons },
+  components: { SupermarketLogo, Button },
   props: ['product', 'addToCart', 'removeFromCart'],
 };
 </script>
