@@ -12,6 +12,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { ProductsMixin } from '@/utils/mixins/productsMixin';
 import Fuse from 'fuse.js';
@@ -26,14 +27,13 @@ export default {
     return {
       searchQuery: '',
       fuse: null,
-      allProducts: [],
       isDropdownOpen: false,
     };
   },
   async mounted() {
     await this.getProducts();
-    this.$nextTick(() => this.$refs.searchInput.focus());
     this.initializeFuse();
+    this.$nextTick(() => this.$refs.searchInput.focus());
     document.addEventListener('mousedown', this.handleClickOutside);
   },
   beforeDestroy() {
@@ -53,6 +53,10 @@ export default {
   methods: {
     ...mapActions(['addToCart', 'removeFromCart']),
     initializeFuse() {
+      if (this.allProducts.length === 0) {
+        console.warn('No products available to initialize Fuse');
+        return;
+      }
       this.fuse = new Fuse(this.allProducts, {
         keys: ['name'],
         includeScore: true,
@@ -65,13 +69,13 @@ export default {
         displayedProducts: this.displayedProducts,
       });
     },
-    handleSearchUpdate({ searchQuery, displayedProducts }) {
-      this.searchQuery = searchQuery;
-      this.displayedProducts = displayedProducts;
-    },
     closeDropdown() {
       this.searchQuery = '';
       this.isDropdownOpen = false;
+    },
+    handleSearchUpdate({ searchQuery, displayedProducts }) {
+      this.searchQuery = searchQuery;
+      this.displayedProducts = displayedProducts;
     },
     showMore() {
       this.limit = this.filteredItems.length;

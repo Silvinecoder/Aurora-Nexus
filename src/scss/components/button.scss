@@ -8,28 +8,25 @@
   width: $size-13;
   height: $size-13;
   border-radius: $size-7;
-  margin-top: 3px;
+  padding-top: 3px;
 
-  svg {
-    display: flex;
-    max-height: $size-7;
+
+  .list_icon{
+    width: 20px;
+    height: 20px;
+  }
+
+  .supermarket_icon{
+    width: 24px;
+    height: 24px;
   }
 }
 
-.back_arrow {
+.supermarket_icon{
   width: 11px;
   height: $size-9;
 }
 
-.supermarket_icons {
-  width: 22px;
-  height: 22px;
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
 
 //Dropdown Buttons
 .dropdown_container {
@@ -63,5 +60,14 @@
   svg {
     width: $size-11;
     height: $size-11;
+  }
+}
+
+.supermarket_toggle_add__button, .supermarket_toggle_close__button{
+  width: 30px;
+  height: 30px;
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }

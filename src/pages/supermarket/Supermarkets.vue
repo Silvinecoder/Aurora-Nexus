@@ -9,9 +9,8 @@
         </div>
       </div>
 
+      <Carousel :selectedSupermarket="selectedSupermarket" @supermarket-selected="handleSupermarketSelected" />
       <div class="layout_style">
-        <Carousel :selectedSupermarket="selectedSupermarket" @supermarket-selected="handleSupermarketSelected" />
-
         <div v-if="selectedSupermarket && categoriesWithProducts.length">
           <div class="cards__category_container" v-for="category in categoriesWithProducts"
             :key="category.category_uuid">

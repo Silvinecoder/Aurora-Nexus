@@ -1,5 +1,10 @@
 .layout_style {
-  margin-right: 7.813rem;
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 500px) {
+    margin-right: 7.813rem;
+    max-width: 1030px;
+  }
 }
 
 body {
@@ -8,14 +13,16 @@ body {
 }
 
 .page_container {
-  display: flex;
+  @media screen and (min-width: 500px) {
+    display: flex;
 
-  .content {
-    flex: 1;
+    .content {
+      flex: 1;
+    }
   }
 }
 
-.products__body{
+.products__body {
   margin-top: $size-12;
   margin-bottom: $size-28;
 }

@@ -2,6 +2,8 @@
   display: flex;
   justify-content: space-between;
   padding: $size-7 0 $size-7 0;
+  width: 100%;
+  max-width: 1030px;
 
 
   .carousel {
