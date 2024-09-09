@@ -5,16 +5,16 @@
       <img src="/src/assets/global/san-logo.png" alt="San logo">
     </button>
 
-    <!-- Back Arrow Button -->
-    <button class="standard_icon back_arrow" v-if="goBackButton" @click="goBack">
-      <svg>
-        <use xlink:href="../assets/icons/supermarket/back-arrow.svg#back_arrow__icon"></use>
+    <!-- Supermarket Button -->
+    <button class="standard_icon bubble_icon" v-if="goToSupermarketButton" @click="supermarket">
+      <svg class="supermarket_icon">
+        <use xlink:href="../assets/icons/supermarket/supermarket-icon.svg#supermarket__icon"></use>
       </svg>
     </button>
 
     <!-- Go to Shopping List Button -->
     <button class="standard_icon bubble_icon" v-if="goToShoppingList" @click="shoppingList">
-      <svg>
+      <svg class="list_icon">
         <use xlink:href="/icons/supermarkets/assets/list.svg#list__icon"></use>
       </svg>
     </button>
@@ -60,13 +60,27 @@
     <button class="shopping_list__delete" @click="clearCart" v-if="clearCart">
       Delete All
     </button>
+
+    <!-- Supermarket Toggle add button-->
+    <button class="supermarket_toggle_add__button"  v-if="supermarketToggleAdd">
+      <svg>
+        <use xlink:href="../assets/icons/supermarket/supermarket-toggle-add.svg#supermarket_toggle_add__icon"></use>
+      </svg>
+    </button>
+
+    <!-- Supermarket Toggle close button-->
+    <button class="supermarket_toggle_close__button"  v-if="supermarketToggleClose">
+      <svg>
+        <use xlink:href="../assets/icons/supermarket/supermarket-toggle-close.svg#supermarket_toggle_close__icon"></use>
+      </svg>
+    </button>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    goBackButton: {
+    goToSupermarketButton: {
       type: Boolean,
       default: false,
     },
@@ -102,6 +116,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    supermarketToggleAdd: {
+      type: Boolean,
+      default: false,
+    },
+    supermarketToggleClose: {
+      type: Boolean,
+      default: false,
+    },
     closeButton: {
       type: Function,
       required: false,
@@ -112,8 +134,8 @@ export default {
     },
   },
   methods: {
-    goBack() {
-      this.$router.go(-1);
+    supermarket() {
+      this.$router.push('/supermarket');
     },
     goHome() {
       this.$router.push('/');

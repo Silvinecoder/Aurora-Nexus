@@ -1,20 +1,64 @@
+.shopping_list_delete_button {
+  margin: $size-12 0 $size-7 auto;
 
- .shopping_list__delete{
-    background-color: $color-white;
-    padding: 4px $size-1;
-    border-radius: $size-7;
-    font-size: 14px;
-    color: $color-dark-green;
-    font-weight: 500;
-  }
+}
 
-.check_list{
+.check_list {
   display: flex;
   justify-content: center;
   align-content: center;
 }
 
-.shopping_list_header{
-  display: flex;
-  justify-content: space-between;
+.shopping_list__delete {
+  background-color: white;
+  padding: $size-1 $size-2;
+  border: 1.5px solid $color-green-3;
+  border-radius: $size-7;
+}
+
+.supermarket_section {
+  margin-bottom: $size-17;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .supermarket_toggle {
+    display: flex;
+    gap: 8px;
+    img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+  }
+
+  .horizontal_card__shopping_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: $size-7;
+
+    section {
+      flex: 1 calc(50% - $size-7);
+      max-width: 500px;
+      box-sizing: border-box;
+      border: 2px solid $color-grey-3;
+      border-radius: $size-12;
+      padding: $size-12 $size-7;
+
+      .horizontal_card {
+        width: 100%;
+
+        .card_body {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+    }
+  }
 }

@@ -14,7 +14,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/home", component: Home },
-    { path: "/supermarkets", component: SupermarketsPage },
+    { path: "/supermarket", component: SupermarketsPage },
     { path: "/supermarket/shopping-list", component: ShoppingList },
   ],
 });

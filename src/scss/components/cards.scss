@@ -35,8 +35,9 @@
 
 // Horizontal Cards
 .horizontal_card_container {
-  margin-bottom: 31px;
+  margin-bottom: $size-12;
   border-bottom: 1px solid $color-grey-3;
+  padding-bottom: $size-7;
 
   .card_body {
     width: 158px;
@@ -44,20 +45,21 @@
 
   &:last-of-type {
     margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
   }
 }
-
 
 .horizontal_card {
   display: flex;
 
   .product_image {
     width: 117px;
-    margin-right: 22px;
+    margin-right: $size-8;
   }
 
   .price_button_container {
-    margin: 22px 0;
+    margin: $size-8 0;
   }
 
   .supermarket_logo {
@@ -90,9 +92,9 @@
 
   .cards_container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    gap: $size-2;
+    flex-wrap: wrap;
+    row-gap: $size-14;
 
     .card {
       border: 2px solid $color-grey-3;

@@ -1,13 +1,19 @@
 .sidebar {
   margin: 0;
   padding: 0;
-  width: 200px;
+  width: 100%;
+  max-width: 200px;
   overflow: auto;
   text-align: center;
+  display: none;
 
   img{
     margin-top: $size-11;
     max-width: 100%;
     height: auto;
+  }
+
+  @media screen and (min-width: 500px) {
+    display: block;
   }
 }

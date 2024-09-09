@@ -1,18 +1,18 @@
-
-
 .search_button {
   color: $color-grey-1;
 }
 
 .search_dropdown_container{
   position: relative;
+  
 .search_input {
   background: $color-white url("/icons/supermarkets/assets/search.svg") no-repeat $size-2;
   background-size: $size-7;
   border-radius: $size-7;
   text-align: left;
   padding-left: $size-15;
-  width: 230px;
+  width: 100%;
+  max-width: 230px;
   height: $size-13;
 
   &:focus::placeholder {
@@ -21,6 +21,10 @@
 }
 
 .dropdown_container{
+  max-height: 500px;
+  height: auto;
+  overflow: scroll;
+  scrollbar-width: thin;
   position: absolute;
   right: 0;
   background: $color-white;
