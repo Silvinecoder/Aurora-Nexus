@@ -15,9 +15,14 @@
         <div class="grouped_shopping_list" v-else>
           <div v-for="(products, supermarket_uuid) in groupedProducts" :key="supermarket_uuid"
             class="supermarket_section">
-            <SupermarketToggle :supermarket_uuids="[supermarket_uuid]" />
-
-            <div class="horizontal_card__shopping_list">
+            <div class="supermarket_toggle__image">
+              <!-- Pass the current state and listen for toggle event -->
+              <SupermarketToggle :isOpen="supermarketState[supermarket_uuid]"
+                @toggle="toggleSupermarket(supermarket_uuid)" />
+              <img :src="getSupermarketImageUrlUuid(supermarket_uuid)" :alt="supermarket_uuid" />
+            </div>
+            <!-- Show or hide cards based on state -->
+            <div v-if="supermarketState[supermarket_uuid]" class="horizontal_card__shopping_list">
               <section v-for="product in products" :key="product.product_uuid">
                 <HorizontalCard :product="product" :isAddedToCart="true" :addToCart="addToCart"
                   :removeFromCart="removeFromCart" :showSupermarketLogo="true" />
@@ -29,9 +34,8 @@
     </div>
   </div>
 </template>
-
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import Button from "@/components/Buttons.vue";
 import Search from "@/components/Search.vue";
 import HorizontalCard from "@/components/HorizontalCard.vue";
@@ -43,54 +47,19 @@ export default {
   components: { Button, Search, HorizontalCard, SideBar, SupermarketToggle },
   mixins: [ProductsMixin],
 
-  data() {
-    return {
-      groupedProducts: {},
-    };
-  },
-
   computed: {
-    ...mapGetters(['isProductInCart']),
-    ...mapState({
-      cart: state => state.cart,
-    }),
-    cartIsEmpty() {
-      return this.cart.length === 0;
-    },
+    ...mapGetters(['cartIsEmpty', 'isProductInCart']),
+    ...mapState(['groupedProducts'])
   },
 
   methods: {
     ...mapActions(['clearCart', 'addToCart', 'removeFromCart']),
-
-    groupProductsBySupermarket() {
-      this.groupedProducts = this.allProducts
-        .filter(product => this.isProductInCart(product.product_uuid))
-        .reduce((acc, product) => {
-          const supermarketUUIDs = product.supermarket_uuids || product.supermarket_uuid;
-          const uuids = Array.isArray(supermarketUUIDs) ? supermarketUUIDs : [supermarketUUIDs];
-
-          uuids.forEach(uuid => {
-            if (!acc[uuid]) acc[uuid] = [];
-            acc[uuid].push(product);
-          });
-
-          return acc;
-        }, {});
-    },
   },
 
   async mounted() {
     await this.getProducts();
-    this.groupProductsBySupermarket();
-  },
-
-  watch: {
-    cart: {
-      handler() {
-        this.groupProductsBySupermarket();
-      },
-      deep: true
-    }
+    this.$store.dispatch('groupProductsBySupermarket', this.allProducts);
+    this.$store.commit('updateAllProducts', this.allProducts);
   }
 };
 </script>

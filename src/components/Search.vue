@@ -7,7 +7,8 @@
     <div class="dropdown_container" v-if="searchQuery && displayedProducts.length > 0">
       <Button :closeButton="closeDropdown" />
       <div class="horizontal_card_container" v-for="product in displayedProducts" :key="product.product_uuid">
-        <HorizontalCard :product="product" :isAddedToCart="isProductInCart(product.product_uuid)" :addToCart="addToCart" :removeFromCart="removeFromCart" />
+        <HorizontalCard :product="product" :isAddedToCart="isProductInCart(product.product_uuid)" :addToCart="addToCart"
+          :removeFromCart="removeFromCart" />
       </div>
     </div>
   </div>
@@ -75,7 +76,7 @@ export default {
     },
     handleSearchUpdate({ searchQuery, displayedProducts }) {
       this.searchQuery = searchQuery;
-      this.displayedProducts = displayedProducts;
+      this.groupProductsBySupermarket(displayedProducts);
     },
     showMore() {
       this.limit = this.filteredItems.length;
@@ -83,7 +84,7 @@ export default {
     handleClickOutside(event) {
       const dropdown = this.$el.querySelector('.dropdown_container');
       const searchInput = this.$refs.searchInput;
-      
+
       if (dropdown && !dropdown.contains(event.target) && searchInput && !searchInput.contains(event.target)) {
         this.closeDropdown();
       }
