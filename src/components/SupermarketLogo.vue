@@ -2,8 +2,8 @@
   <div class="supermarket_logo" :class="supermarketLogoClass">
     <!-- Accordion button -->
     <button @click="toggleContent()">
-      <span v-if="isOpen">&#9664;</span>
-      <span v-else>&#9654;</span>
+      <Button :supermarketAccordionOpen="true" v-if="isOpen"></Button>
+      <Button :supermarketAccordionClosed="true" v-else></Button>
     </button>
 
     <!-- Supermarkets logo accordion -->
@@ -15,9 +15,11 @@
 
 <script>
 import { ProductsMixin } from '@/utils/mixins/productsMixin';
+import Button from "@/components/Buttons.vue";
 
 export default {
   mixins: [ProductsMixin],
+  components: { Button },
   props: {
     supermarket_uuids: {
       type: Array,
