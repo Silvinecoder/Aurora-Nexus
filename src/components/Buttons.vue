@@ -147,7 +147,7 @@ export default {
       this.$router.push('/supermarket');
     },
     goHome() {
-      this.$router.push('/');
+      this.$router.push('/supermarket');
     },
     shoppingList() {
       this.$router.push('/supermarket/shopping-list');

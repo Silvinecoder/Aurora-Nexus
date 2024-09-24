@@ -34,8 +34,9 @@
     </div>
   </div>
 </template>
+
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import Button from "@/components/Buttons.vue";
 import Search from "@/components/Search.vue";
 import HorizontalCard from "@/components/HorizontalCard.vue";
@@ -47,19 +48,62 @@ export default {
   components: { Button, Search, HorizontalCard, SideBar, SupermarketToggle },
   mixins: [ProductsMixin],
 
+  data() {
+    return {
+      groupedProducts: {},
+    };
+  },
+
   computed: {
-    ...mapGetters(['cartIsEmpty', 'isProductInCart']),
-    ...mapState(['groupedProducts'])
+    ...mapGetters(['isProductInCart', 'supermarketState']),
+    ...mapState({
+      cart: state => state.cart,
+    }),
+    cartIsEmpty() {
+      return this.cart.length === 0;
+    },
   },
 
   methods: {
     ...mapActions(['clearCart', 'addToCart', 'removeFromCart']),
+
+    toggleSupermarket(supermarket_uuid) {
+      // Update supermarket state logic here
+      const currentState = this.supermarketState[supermarket_uuid];
+      this.$store.dispatch('updateSupermarketState', {
+        [supermarket_uuid]: !currentState,
+      });
+    },
+
+    groupProductsBySupermarket() {
+      this.groupedProducts = this.allProducts
+        .filter(product => this.isProductInCart(product.product_uuid))
+        .reduce((acc, product) => {
+          const supermarketUUIDs = product.supermarket_uuids || product.supermarket_uuid;
+          const uuids = Array.isArray(supermarketUUIDs) ? supermarketUUIDs : [supermarketUUIDs];
+
+          uuids.forEach(uuid => {
+            if (!acc[uuid]) acc[uuid] = [];
+            acc[uuid].push(product);
+          });
+
+          return acc;
+        }, {});
+    },
   },
 
   async mounted() {
     await this.getProducts();
-    this.$store.dispatch('groupProductsBySupermarket', this.allProducts);
-    this.$store.commit('updateAllProducts', this.allProducts);
+    this.groupProductsBySupermarket();
+  },
+
+  watch: {
+    cart: {
+      handler() {
+        this.groupProductsBySupermarket();
+      },
+      deep: true
+    }
   }
 };
 </script>
