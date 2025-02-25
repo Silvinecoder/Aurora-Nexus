@@ -14,8 +14,8 @@
         />
       </div>
 
-      <SupermarketLogo v-if="showSupermarketLogo" :supermarket_uuids="product.supermarket_uuids" />
     </div>
+      <SupermarketLogo :supermarket_names="[product.supermarket_name]" />
   </div>
 </template>
 

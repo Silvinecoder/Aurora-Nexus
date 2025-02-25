@@ -41,7 +41,7 @@ import Card from "@/components/Card.vue";
 import CategoryTitle from '../../components/CategoryTitle.vue';
 import Search from "@/components/Search.vue";
 import SideBar from "@/components/SideBar.vue";
-import { SupermarketsCategoriesProductsMixin } from "@/utils/mixins/supermarketsCategoriesProductsMixin";
+import { SupermarketsCategoriesProductsMixin } from "@/utils/mixins/endpoints/supermarketsCategoriesProductsMixin";
 import { mapGetters, mapActions } from "vuex";
 
 export default {

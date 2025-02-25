@@ -5,6 +5,7 @@ export const AttributesMixin = {
     return {
       attributes: [],
       attributesWithProducts: [],
+      attributesWithProduct: [],
     };
   },
   methods: {
@@ -17,10 +18,17 @@ export const AttributesMixin = {
     },
     async fetchAttributesWithProducts() {
       try {
-        this.attributesWithProducts = await fetchData('/attributes/products');
+        this.attributesWithProducts = await fetchData(`/attributes/${attribute_uuid}/products`);
       } catch (error) {
         console.error('Failed to fetch attributes with products:', error);
       }
     },
+    async fetchAttributesWithProduct() {
+      try {
+        this.attributesWithProduct = await fetchData(`/attributes/${attribute_uuid}/products/${product_uuid}`)
+      } catch (error) {
+        console.error('Failed to fetch attributes with product:', error)
+      }
+    }
   },
 };

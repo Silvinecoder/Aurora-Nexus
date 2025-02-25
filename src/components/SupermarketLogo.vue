@@ -8,22 +8,28 @@
 
     <!-- Supermarkets logo accordion -->
     <div v-if="isOpen" class="content">
-        <img v-for="uuid in supermarket_uuids" :key="uuid" :src="getSupermarketImageUrl(uuid)" :alt="uuid" class="supermarket-logo" />
+      <img 
+        v-for="name in supermarket_names"
+        :key="name"
+        :src="getSupermarketImageUrl(name)" 
+        :alt="name" 
+        class="supermarket-logo" 
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { ProductsMixin } from '@/utils/mixins/productsMixin';
+import { SupermarketsCategoriesProductsMixin } from '@/utils/mixins/endpoints/supermarketsCategoriesProductsMixin';
 import Button from "@/components/Buttons.vue";
 
 export default {
-  mixins: [ProductsMixin],
+  mixins: [SupermarketsCategoriesProductsMixin],
   components: { Button },
   props: {
-    supermarket_uuids: {
+    supermarket_names: {
       type: Array,
-      required: true
+      required: true,
     }
   },
   data() {
@@ -42,10 +48,8 @@ export default {
   methods: {
     toggleContent() {
       this.isOpen = !this.isOpen;
-    },
-    getSupermarketImageUrl(supermarket_uuid) {
-      return this.getSupermarketImageUrlUuid(supermarket_uuid);
     }
   }
+
 };
 </script>
