@@ -5,23 +5,18 @@
 
     <!-- Supermarkets logo accordion -->
     <div v-if="isOpen" class="content">
-      <img 
-        v-for="name in supermarket_names"
-        :key="name"
-        :src="getSupermarketImageUrl(name)" 
-        :alt="name" 
-        class="supermarket-logo" 
-      />
+      <img v-for="name in supermarket_names" :key="name" :src="getSupermarketImageUrl(name)" :alt="name"
+        class="supermarket-logo" />
     </div>
   </div>
 </template>
 
 <script>
-import { SupermarketsCategoriesProductsMixin } from '@/utils/mixins/endpoints/supermarketsCategoriesProductsMixin';
+import { supermarketImageHelper } from '@/utils/mixins/helpers/SupermarketImageHelper';
 import Button from '@/components/Buttons.vue';
 
 export default {
-  mixins: [SupermarketsCategoriesProductsMixin],
+  mixins: [supermarketImageHelper],
   components: { Button },
   props: {
     supermarket_names: {
@@ -31,7 +26,7 @@ export default {
   },
   data() {
     return {
-      isOpen: false
+      isOpen: true
     };
   },
   computed: {

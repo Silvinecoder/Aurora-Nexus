@@ -1,30 +1,36 @@
-import { fetchData } from '@/api/api';
+import { fetchData } from "@/api/api";
 
 export const ProductsMixin = {
   data() {
     return {
-      products: [], 
+      products: [],
       product: null,
     };
   },
   methods: {
     async getProducts() {
       try {
-        this.products = await fetchData('/products');
+        const response = await fetchData("/products");
+        this.products = response.map((product) => {
+          return {
+            ...product,
+            supermarkets: product.supermarkets,
+          };
+        });
       } catch (error) {
-        console.error('Failed to fetch all products:', error);
+        console.error("Failed to fetch all products:", error);
       }
     },
     async getProduct(product_uuid) {
       if (!product_uuid) {
-        console.error('Product UUID is required to fetch product.');
+        console.error("Product UUID is required to fetch product.");
         return;
       }
       try {
-        this.product = await fetchData(`/products/${product_uuid}`)
+        this.product = await fetchData(`/products/${product_uuid}`);
       } catch (error) {
-        console.error('Failed to fetch product:', error);
+        console.error("Failed to fetch product:", error);
       }
-    }
+    },
   },
 };
