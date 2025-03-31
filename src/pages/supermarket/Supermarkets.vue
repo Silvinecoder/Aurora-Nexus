@@ -8,23 +8,23 @@
           <Button :goToShoppingList="true" />
         </div>
       </div>
-
       <Carousel :selectedSupermarket="selectedSupermarket" @supermarket-selected="handleSupermarketSelected" />
       <div class="layout_style">
         <div v-if="selectedSupermarket && categoriesWithProducts.length">
           <div class="cards__category_container" v-for="category in categoriesWithProducts"
             :key="category.category_uuid">
-
             <CategoryTitle v-if="hasProducts(category)" :categoryName="category.category_name"
               :showButton="showMoreButton(category)" :isExpanded="showAllProducts(category.category_uuid)"
               @toggleExpand="toggleShowAll" :hasMoreThanTenProducts="category.products.length > 10" />
-
             <div class="cards_container" v-if="hasProducts(category)">
               <Card v-for="product in visibleProducts(category)" :key="product.product_uuid" :product="product"
                 :isAddedToCart="isProductInCart(product.product_uuid)" :addToCart="addToCart"
                 :removeFromCart="removeFromCart" />
             </div>
           </div>
+        </div>
+        <div v-else-if="isLoadingData" class="loading_container">
+          <p>Loading products...</p>
         </div>
         <div v-else class="no_supermarket_selected">
           <p>Please select a supermarket</p>
@@ -49,7 +49,6 @@ export default {
   mixins: [SupermarketsCategoriesProductsMixin],
   data() {
     return {
-      supermarketsWithCategories: [],
       expandedCategories: {},
     };
   },
@@ -58,31 +57,33 @@ export default {
     selectedSupermarket() {
       return this.getSelectedSupermarket;
     },
-    categoriesWithProducts() {
-      const supermarketData = this.supermarketsWithCategories.find(s => s.supermarket_uuid === this.selectedSupermarket.supermarket_uuid);
-      return supermarketData ? supermarketData.categories : [];
-    },
   },
   methods: {
     ...mapActions(['updateSelectedSupermarket', 'addToCart', 'removeFromCart']),
+
     async handleSupermarketSelected(supermarket) {
+      console.log('Supermarket selected in component:', supermarket.supermarket_name);
       await this.updateSelectedSupermarket(supermarket);
-      await this.loadCategoriesAndProducts();
     },
+
     hasProducts(category) {
       return category.products && category.products.length > 0;
     },
+
     visibleProducts(category) {
       return this.expandedCategories[category.category_uuid]
         ? category.products
         : category.products.slice(0, 10);
     },
+
     showMoreButton(category) {
-      return category.products.length > 10;
+      return category.products && category.products.length > 10;
     },
+
     showAllProducts(categoryUUID) {
       return !!this.expandedCategories[categoryUUID];
     },
+
     toggleShowAll(categoryName) {
       const category = this.categoriesWithProducts.find(cat => cat.category_name === categoryName);
       if (category) {

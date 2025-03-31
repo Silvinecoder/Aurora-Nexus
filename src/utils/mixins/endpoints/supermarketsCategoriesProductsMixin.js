@@ -1,6 +1,6 @@
-import { fetchData } from '@/api/api';
-import { mapGetters } from 'vuex';
-import { supermarketHelper } from '../helpers/supermarketHelper';
+import { fetchData } from "@/api/api";
+import { mapGetters } from "vuex";
+import { supermarketHelper } from "../helpers/supermarketHelper";
 
 export const SupermarketsCategoriesProductsMixin = {
   mixins: [supermarketHelper],
@@ -14,16 +14,38 @@ export const SupermarketsCategoriesProductsMixin = {
       productsByCategory: [],
       product: null,
       supermarketsWithCategories: [],
+      isLoadingData: false,
     };
   },
   computed: {
-    ...mapGetters(['getSelectedSupermarket']),
+    ...mapGetters(["getSelectedSupermarket"]),
+    categoriesWithProducts() {
+      if (
+        !this.supermarketsWithCategories ||
+        this.supermarketsWithCategories.length === 0 ||
+        !this.selectedSupermarket
+      ) {
+        return [];
+      }
+      const supermarketData = this.supermarketsWithCategories.find(
+        (s) => s.supermarket_uuid === this.selectedSupermarket.supermarket_uuid
+      );
+      return supermarketData ? supermarketData.categories : [];
+    },
   },
   watch: {
     getSelectedSupermarket: {
       async handler(newSupermarket) {
         if (newSupermarket) {
-          this.supermarketsWithCategories = await this.loadCategoriesAndProducts(newSupermarket);
+          this.isLoadingData = true;
+          try {
+            this.supermarketsWithCategories =
+              await this.loadCategoriesAndProducts(newSupermarket);
+          } catch (error) {
+            console.error("Error loading categories and products:", error);
+          } finally {
+            this.isLoadingData = false;
+          }
         } else {
           this.supermarketsWithCategories = [];
         }
@@ -33,11 +55,14 @@ export const SupermarketsCategoriesProductsMixin = {
   },
   methods: {
     async fetchSupermarkets() {
+      this.isLoadingData = true;
       try {
-        this.supermarkets = await fetchData('/supermarkets');
+        this.supermarkets = await fetchData("/supermarkets");
       } catch (error) {
-        console.error('Failed to fetch supermarkets:', error);
+        console.error("Failed to fetch supermarkets:", error);
+      } finally {
+        this.isLoadingData = false;
       }
-    }
-  }
+    },
+  },
 };

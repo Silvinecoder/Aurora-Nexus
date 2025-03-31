@@ -1,3 +1,4 @@
+// supermarketHelper.js
 import { fetchData } from "@/api/api";
 import { mapActions } from "vuex";
 
@@ -7,7 +8,8 @@ export const supermarketHelper = {
 
     async loadCategoriesAndProducts(selectedSupermarket) {
       if (!selectedSupermarket) {
-        return "No supermarket selected";
+        console.warn("No supermarket selected");
+        return [];
       }
 
       try {
@@ -15,9 +17,8 @@ export const supermarketHelper = {
           selectedSupermarket.supermarket_uuid
         );
         const filteredCategories = categoriesWithProducts.filter(
-          (category) => category.products.length > 0
+          (category) => category.products && category.products.length > 0
         );
-
         return [
           {
             supermarket_uuid: selectedSupermarket.supermarket_uuid,
@@ -35,17 +36,26 @@ export const supermarketHelper = {
         const categories = await fetchData(
           `/supermarkets/${supermarket_uuid}/categories`
         );
-        return await Promise.all(
+        const categoriesWithProducts = await Promise.all(
           categories.map(async (category) => {
-            const products = await fetchData(
-              `/supermarkets/${supermarket_uuid}/categories/${category.category_uuid}/products`
-            );
-
-            return { ...category, products };
+            try {
+              const products = await fetchData(
+                `/supermarkets/${supermarket_uuid}/categories/${category.category_uuid}/products`
+              );
+              return { ...category, products };
+            } catch (error) {
+              console.error(
+                `Error fetching products for category ${category.category_name}:`,
+                error
+              );
+              return { ...category, products: [] };
+            }
           })
         );
+
+        return categoriesWithProducts;
       } catch (error) {
-        console.error("Error fetching categories or products:", error.message);
+        console.error("Error fetching categories:", error.message);
         throw error;
       }
     },
@@ -56,29 +66,24 @@ export const supermarketHelper = {
 
     getSupermarketImageUrl(supermarket_name) {
       const formattedName = supermarket_name.toLowerCase().replace(/\s+/g, "_");
-
       const imageMap = {
         continente: "/icons/supermarkets/stores/continente.png",
         pingo_doce: "/icons/supermarkets/stores/pingo_doce.png",
         auchan: "/icons/supermarkets/stores/auchan.png",
         mercadona: "/icons/supermarkets/stores/mercadona.png",
       };
-
       return imageMap[formattedName];
     },
 
     groupProductsBySupermarket() {
       this.groupedProducts = {};
-      // Loop through all supermarkets
       this.supermarketsWithCategories.forEach((supermarket) => {
         supermarket.categories.forEach((category) => {
           category.products.forEach((product) => {
             const supermarketUUID = supermarket.supermarket_uuid;
-
             const uuidArray = Array.isArray(supermarketUUID)
               ? supermarketUUID
               : [supermarketUUID];
-
             uuidArray.forEach((uuid) => {
               if (!this.groupedProducts[uuid]) {
                 this.groupedProducts[uuid] = [];

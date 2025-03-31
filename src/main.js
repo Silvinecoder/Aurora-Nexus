@@ -5,7 +5,6 @@ import { createRouter, createWebHistory } from "vue-router";
 import store from "./utils/store/index";
 
 // Import your components for routing
-import Home from "../src/pages/Home.vue";
 import SupermarketsPage from "./pages/supermarket/Supermarkets.vue";
 import ShoppingList from "../src/pages/supermarket/ShoppingList.vue";
 
@@ -13,9 +12,8 @@ import ShoppingList from "../src/pages/supermarket/ShoppingList.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/home", component: Home },
-    { path: "/supermarket", component: SupermarketsPage },
-    { path: "/supermarket/shopping-list", component: ShoppingList },
+    { path: "/", component: SupermarketsPage },
+    { path: "/shopping-list", component: ShoppingList },
   ],
 });
 

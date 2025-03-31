@@ -41,7 +41,7 @@
       <p>See All</p>
     </button>
 
-    <button class="see_less__button"  v-if="seeLessButton">
+    <button class="see_less__button" v-if="seeLessButton">
       <svg>
         <use xlink:href="../assets/icons/supermarket/see-less.svg#see_less__icon"></use>
       </svg>
@@ -52,27 +52,30 @@
       Delete All
     </button>
 
-    <button class="supermarket_toggle_add__button"  v-if="supermarketToggleAdd">
+    <button class="supermarket_toggle_add__button" v-if="supermarketToggleAdd">
       <svg>
         <use xlink:href="../assets/icons/supermarket/supermarket-toggle-add.svg#supermarket_toggle_add__icon"></use>
       </svg>
     </button>
 
-    <button class="supermarket_toggle_close__button"  v-if="supermarketToggleClose">
+    <button class="supermarket_toggle_close__button" v-if="supermarketToggleClose">
       <svg>
         <use xlink:href="../assets/icons/supermarket/supermarket-toggle-close.svg#supermarket_toggle_close__icon"></use>
       </svg>
     </button>
 
-    <button class="supermarket_accordion_closed__button"  v-if="supermarketAccordionClosed">
+    <button class="supermarket_accordion_closed__button" v-if="supermarketAccordionClosed">
       <svg>
-        <use xlink:href="../assets/icons/supermarket/supermarket-accordion-closed.svg#supermarket_accordion_closed__icon"></use>
+        <use
+          xlink:href="../assets/icons/supermarket/supermarket-accordion-closed.svg#supermarket_accordion_closed__icon">
+        </use>
       </svg>
     </button>
 
-    <button class="supermarket_accordion_open__button"  v-if="supermarketAccordionOpen">
+    <button class="supermarket_accordion_open__button" v-if="supermarketAccordionOpen">
       <svg>
-        <use xlink:href="../assets/icons/supermarket/supermarket-accordion-open.svg#supermarket_accordion_open__icon"></use>
+        <use xlink:href="../assets/icons/supermarket/supermarket-accordion-open.svg#supermarket_accordion_open__icon">
+        </use>
       </svg>
     </button>
   </div>
@@ -144,13 +147,13 @@ export default {
   },
   methods: {
     supermarket() {
-      this.$router.push('/supermarket');
+      this.$router.push('/');
     },
     goHome() {
       this.$router.push('/');
     },
     shoppingList() {
-      this.$router.push('/supermarket/shopping-list');
+      this.$router.push('/shopping-list');
     },
   },
 };
