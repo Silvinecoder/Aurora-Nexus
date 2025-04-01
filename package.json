@@ -21,7 +21,7 @@
     "cssnano": "^7.0.6",
     "postcss": "^8.5.2",
     "sass": "^1.72.0",
-    "vite": "^6.2.3"
+    "vite": "^6.2.4"
   },
   "overrides": {
     "esbuild": "^0.25.0"
