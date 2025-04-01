@@ -7,87 +7,72 @@
     <div class="dropdown_container" v-if="searchQuery && displayedProducts.length > 0">
       <Button :closeButton="closeDropdown" />
       <div class="horizontal_card_container" v-for="product in displayedProducts" :key="product.product_uuid">
-        <HorizontalCard :product="product" :isAddedToCart="isProductInCart(product.product_uuid)" :addToCart="addToCart" :removeFromCart="removeFromCart" />
+        <HorizontalCard :product="product" :isAddedToCart="isProductInCart(product.product_uuid)" :addToCart="addToCart"
+          :removeFromCart="removeFromCart" :showSupermarketLogo="false" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ProductsMixin } from '@/utils/mixins/productsMixin';
-import Fuse from 'fuse.js';
-import HorizontalCard from '@/components/HorizontalCard.vue';
-import Button from '@/components/Buttons.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { ProductsMixin } from "@/utils/mixins/endpoints/productsMixin";
+import { searchHelper } from "@/utils/mixins/helpers/searchHelper";
+import HorizontalCard from "@/components/HorizontalCard.vue";
+import Button from "@/components/Buttons.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: { HorizontalCard, Button },
-  mixins: [ProductsMixin],
+  mixins: [searchHelper, ProductsMixin],
+
   data() {
     return {
-      searchQuery: '',
-      fuse: null,
       isDropdownOpen: false,
+      displayedProducts: [],
     };
   },
+
   async mounted() {
-    await this.getProducts();
-    this.initializeFuse();
+    try {
+      await this.getProducts();
+      this.initializeSearch(this.products);
+    } catch (error) {
+      console.error("Error loading products:", error);
+    }
+
     this.$nextTick(() => this.$refs.searchInput.focus());
-    document.addEventListener('mousedown', this.handleClickOutside);
+    document.addEventListener("mousedown", this.handleClickOutside);
   },
+
   beforeDestroy() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
+    document.removeEventListener("mousedown", this.handleClickOutside);
   },
+
   computed: {
-    ...mapGetters(['isProductInCart']),
-    filteredItems() {
-      if (!this.searchQuery.trim()) return [];
-      const results = this.fuse.search(this.searchQuery);
-      return results.map(result => result.item);
-    },
-    displayedProducts() {
-      return this.filteredItems;
-    },
+    ...mapGetters(["isProductInCart"]),
   },
+
   methods: {
-    ...mapActions(['addToCart', 'removeFromCart']),
-    initializeFuse() {
-      if (this.allProducts.length === 0) {
-        console.warn('No products available to initialize Fuse');
-        return;
-      }
-      this.fuse = new Fuse(this.allProducts, {
-        keys: ['name'],
-        includeScore: true,
-        threshold: 0.3,
-      });
-    },
-    updateSearchQuery() {
-      this.$emit("update", {
-        searchQuery: this.searchQuery,
-        displayedProducts: this.displayedProducts,
-      });
-    },
+    ...mapActions(["addToCart", "removeFromCart"]),
+
     closeDropdown() {
-      this.searchQuery = '';
+      this.searchQuery = "";
       this.isDropdownOpen = false;
     },
-    handleSearchUpdate({ searchQuery, displayedProducts }) {
-      this.searchQuery = searchQuery;
-      this.displayedProducts = displayedProducts;
-    },
-    showMore() {
-      this.limit = this.filteredItems.length;
-    },
+
     handleClickOutside(event) {
-      const dropdown = this.$el.querySelector('.dropdown_container');
+      const dropdown = this.$el.querySelector(".dropdown_container");
       const searchInput = this.$refs.searchInput;
-      
-      if (dropdown && !dropdown.contains(event.target) && searchInput && !searchInput.contains(event.target)) {
+
+      if (
+        dropdown &&
+        !dropdown.contains(event.target) &&
+        searchInput &&
+        !searchInput.contains(event.target)
+      ) {
         this.closeDropdown();
       }
-    }
+    },
   },
 };
 </script>

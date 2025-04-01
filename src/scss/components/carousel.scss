@@ -5,13 +5,12 @@
   width: 100%;
   max-width: 1030px;
 
-
   .carousel {
     width: 91px;
     height: 100px;
 
-     &.not-selected{
-      opacity:0.6;
+    &.not-selected {
+      opacity: 0.6;
     }
 
     img {
@@ -23,7 +22,8 @@
   }
 }
 
-.no_supermarket_selected{
+.no_supermarket_selected,
+.loading_container {
   color: $color-grey-1;
   text-align: center;
   margin-top: 200px;

@@ -10,17 +10,16 @@
       </div>
       <div class="layout_style">
         <Button class="shopping_list_delete_button" :clearCart="clearCart" />
-
         <div class="check_list" v-if="cartIsEmpty">Your shopping list is empty.</div>
         <div class="grouped_shopping_list" v-else>
           <div v-for="(products, supermarket_uuid) in groupedProducts" :key="supermarket_uuid"
             class="supermarket_section">
-            <SupermarketToggle :supermarket_uuids="[supermarket_uuid]" />
-
+            <SupermarketToggle :supermarket_names="products.length > 0 ?
+              [products[0].supermarkets[0].supermarket_name] : []" />
             <div class="horizontal_card__shopping_list">
               <section v-for="product in products" :key="product.product_uuid">
                 <HorizontalCard :product="product" :isAddedToCart="true" :addToCart="addToCart"
-                  :removeFromCart="removeFromCart" :showSupermarketLogo="true" />
+                  :removeFromCart="removeFromCart" />
               </section>
             </div>
           </div>
@@ -37,11 +36,12 @@ import Search from "@/components/Search.vue";
 import HorizontalCard from "@/components/HorizontalCard.vue";
 import SideBar from "@/components/SideBar.vue";
 import SupermarketToggle from "@/components/SupermarketToggle.vue";
-import { ProductsMixin } from '@/utils/mixins/productsMixin';
+import { ProductsMixin } from '@/utils/mixins/endpoints/productsMixin';
+import { supermarketImageHelper } from '@/utils/mixins/helpers/SupermarketImageHelper';
 
 export default {
   components: { Button, Search, HorizontalCard, SideBar, SupermarketToggle },
-  mixins: [ProductsMixin],
+  mixins: [ProductsMixin, supermarketImageHelper],
 
   data() {
     return {
@@ -63,32 +63,42 @@ export default {
     ...mapActions(['clearCart', 'addToCart', 'removeFromCart']),
 
     groupProductsBySupermarket() {
-      this.groupedProducts = this.allProducts
-        .filter(product => this.isProductInCart(product.product_uuid))
-        .reduce((acc, product) => {
-          const supermarketUUIDs = product.supermarket_uuids || product.supermarket_uuid;
-          const uuids = Array.isArray(supermarketUUIDs) ? supermarketUUIDs : [supermarketUUIDs];
+      console.log("Cart contents:", this.cart);
 
-          uuids.forEach(uuid => {
-            if (!acc[uuid]) acc[uuid] = [];
-            acc[uuid].push(product);
-          });
+      this.groupedProducts = this.cart.reduce((groups, product) => {
+        const supermarketUuid = product.supermarket_uuid;
 
-          return acc;
-        }, {});
-    },
+        if (!groups[supermarketUuid]) {
+          groups[supermarketUuid] = [];
+        }
+
+        groups[supermarketUuid].push(product);
+        return groups;
+      }, {});
+    }
   },
 
   async mounted() {
-    await this.getProducts();
-    this.groupProductsBySupermarket();
+    if (this.getSelectedSupermarket) {
+      await this.loadProductsBySupermarket(this.getSelectedSupermarket);
+      this.groupProductsBySupermarket();
+    }
   },
 
   watch: {
+    // Watch for changes in the list of products
+    supermarketsProducts: {
+      handler() {
+        this.groupProductsBySupermarket();
+      },
+      deep: true
+    },
+    // Watch for changes in the cart
     cart: {
       handler() {
         this.groupProductsBySupermarket();
       },
+      immediate: true,
       deep: true
     }
   }

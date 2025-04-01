@@ -6,16 +6,13 @@
 
       <div class="price_button_container">
         <p>{{ product.price }}</p>
-        <Button 
-          :product="product" 
-          :isAddedToCart="isAddedToCart"
-          :addToCart="addToCart" 
-          :removeFromCart="removeFromCart" 
-        />
+        <Button :product="product" :isAddedToCart="isAddedToCart" :addToCart="addToCart"
+          :removeFromCart="removeFromCart" />
       </div>
 
-      <SupermarketLogo v-if="showSupermarketLogo" :supermarket_uuids="product.supermarket_uuids" />
     </div>
+    <SupermarketLogo v-if="showSupermarketLogo"
+      :supermarket_names="product.supermarkets.map(s => s.supermarket_name)" />
   </div>
 </template>
 

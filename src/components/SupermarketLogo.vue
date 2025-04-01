@@ -1,34 +1,33 @@
 <template>
-  <div class="supermarket_logo" :class="supermarketLogoClass">
+  <div class="supermarket_logo" @click="toggleContent()">
     <!-- Accordion button -->
-    <button @click="toggleContent()">
-      <Button :supermarketAccordionOpen="true" v-if="isOpen"></Button>
-      <Button :supermarketAccordionClosed="true" v-else></Button>
-    </button>
+    <Button :supermarketAccordionOpen="true" v-if="isOpen"></Button>
+    <Button :supermarketAccordionClosed="true" v-else></Button>
 
     <!-- Supermarkets logo accordion -->
     <div v-if="isOpen" class="content">
-        <img v-for="uuid in supermarket_uuids" :key="uuid" :src="getSupermarketImageUrl(uuid)" :alt="uuid" class="supermarket-logo" />
+      <img v-for="name in supermarket_names" :key="name" :src="getSupermarketImageUrl(name)" :alt="name"
+        class="supermarket-logo" />
     </div>
   </div>
 </template>
 
 <script>
-import { ProductsMixin } from '@/utils/mixins/productsMixin';
+import { supermarketImageHelper } from '@/utils/mixins/helpers/SupermarketImageHelper';
 import Button from "@/components/Buttons.vue";
 
 export default {
-  mixins: [ProductsMixin],
+  mixins: [supermarketImageHelper],
   components: { Button },
   props: {
-    supermarket_uuids: {
+    supermarket_names: {
       type: Array,
-      required: true
+      required: true,
     }
   },
   data() {
     return {
-      isOpen: false
+      isOpen: true
     };
   },
   computed: {
@@ -42,10 +41,8 @@ export default {
   methods: {
     toggleContent() {
       this.isOpen = !this.isOpen;
-    },
-    getSupermarketImageUrl(supermarket_uuid) {
-      return this.getSupermarketImageUrlUuid(supermarket_uuid);
     }
   }
+
 };
 </script>
