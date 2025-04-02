@@ -15,7 +15,7 @@
             :key="category.category_uuid">
             <CategoryTitle v-if="hasProducts(category)" :categoryName="category.category_name"
               :showButton="showMoreButton(category)" :isExpanded="showAllProducts(category.category_uuid)"
-              @toggleExpand="toggleShowAll" :hasMoreThanTenProducts="category.products.length > 10" />
+              @toggleExpand="toggleShowAll" :hasMoreThanTenProducts="category.hasMoreThanTenProducts" />
             <div class="cards_container" v-if="hasProducts(category)">
               <Card v-for="product in visibleProducts(category)" :key="product.product_uuid" :product="product"
                 :isAddedToCart="isProductInCart(product.product_uuid)" :addToCart="addToCart"

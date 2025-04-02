@@ -10,23 +10,21 @@
   border-radius: $size-7;
   padding-top: 3px;
 
-
-  .list_icon{
+  .list_icon {
     width: 20px;
     height: 20px;
   }
 
-  .supermarket_icon{
+  .supermarket_icon {
     width: 24px;
     height: 24px;
   }
 }
 
-.supermarket_icon{
+.supermarket_icon {
   width: 11px;
   height: $size-9;
 }
-
 
 //Dropdown Buttons
 .dropdown_container {
@@ -41,7 +39,8 @@
   }
 }
 
-.horizontal_card, .card{
+.horizontal_card,
+.card {
   button {
     margin: 0;
     max-width: $size-12;
@@ -51,18 +50,20 @@
       height: $size-12;
     }
   }
-  .supermarket_accordion_closed__button, .supermarket_accordion_open__button {
-    display: flex;
-    max-width: $size-7;
-    max-height: $size-7;
-    svg {
-      width: $size-7;
-      height: $size-7;
-    }
+}
+
+.supermarket_accordion_closed__button,
+.supermarket_accordion_open__button {
+  width: $size-7;
+  height: $size-7;
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }
 
-.see_all__button, .see_less__button {
+.see_all__button,
+.see_less__button {
   display: flex;
   align-items: center;
   gap: $size-4;
@@ -72,7 +73,8 @@
   }
 }
 
-.supermarket_toggle_add__button, .supermarket_toggle_close__button{
+.supermarket_toggle_add__button,
+.supermarket_toggle_close__button {
   width: 30px;
   height: 30px;
   svg {
