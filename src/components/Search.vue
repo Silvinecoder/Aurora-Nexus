@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import { ProductsMixin } from "@/utils/mixins/endpoints/productsMixin";
-import { searchHelper } from "@/utils/mixins/helpers/searchHelper";
+import { ProductsMixin } from "@/api/endpoints/productsMixin";
+import { searchHelper } from "@/utils/helpers/searchHelper";
 import HorizontalCard from "@/components/HorizontalCard.vue";
 import Button from "@/components/Buttons.vue";
 import { mapActions, mapGetters } from "vuex";
