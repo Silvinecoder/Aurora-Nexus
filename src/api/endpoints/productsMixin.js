@@ -1,13 +1,13 @@
-import { fetchData } from "@/api/api";
+import { fetchData } from "@/api/config/db_config";
 
 export const ProductsMixin = {
   data() {
     return {
       products: [],
-      product: null,
     };
   },
   methods: {
+    // This method is being utilised in the search.vue component where it fetches all the products that have supermarket as reference
     async getProducts() {
       try {
         const response = await fetchData("/products");
@@ -19,17 +19,6 @@ export const ProductsMixin = {
         });
       } catch (error) {
         console.error("Failed to fetch all products:", error);
-      }
-    },
-    async getProduct(product_uuid) {
-      if (!product_uuid) {
-        console.error("Product UUID is required to fetch product.");
-        return;
-      }
-      try {
-        this.product = await fetchData(`/products/${product_uuid}`);
-      } catch (error) {
-        console.error("Failed to fetch product:", error);
       }
     },
   },

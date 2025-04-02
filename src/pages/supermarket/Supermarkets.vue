@@ -10,8 +10,8 @@
       </div>
       <Carousel :selectedSupermarket="selectedSupermarket" @supermarket-selected="handleSupermarketSelected" />
       <div class="layout_style">
-        <div v-if="selectedSupermarket && categoriesWithProducts.length">
-          <div class="cards__category_container" v-for="category in categoriesWithProducts"
+        <div v-if="selectedSupermarket && categoriesForSelectedSupermarket.length">
+          <div class="cards__category_container" v-for="category in categoriesForSelectedSupermarket"
             :key="category.category_uuid">
             <CategoryTitle v-if="hasProducts(category)" :categoryName="category.category_name"
               :showButton="showMoreButton(category)" :isExpanded="showAllProducts(category.category_uuid)"
@@ -41,7 +41,7 @@ import Card from "@/components/Card.vue";
 import CategoryTitle from '../../components/CategoryTitle.vue';
 import Search from "@/components/Search.vue";
 import SideBar from "@/components/SideBar.vue";
-import { SupermarketsCategoriesProductsMixin } from "@/utils/mixins/endpoints/supermarketsCategoriesProductsMixin";
+import { SupermarketsCategoriesProductsMixin } from "@/api/endpoints/supermarketsCategoriesProductsMixin";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -85,7 +85,7 @@ export default {
     },
 
     toggleShowAll(categoryName) {
-      const category = this.categoriesWithProducts.find(cat => cat.category_name === categoryName);
+      const category = this.categoriesForSelectedSupermarket.find(cat => cat.category_name === categoryName);
       if (category) {
         this.expandedCategories[category.category_uuid] = !this.expandedCategories[category.category_uuid];
       }

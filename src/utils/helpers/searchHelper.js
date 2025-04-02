@@ -8,6 +8,10 @@ export const searchHelper = {
     };
   },
   methods: {
+    /**
+     * Initializes the Fuse.js search instance with the provided items.
+     * @param {Array} items - The array of items to search through.
+     **/
     initializeSearch(items) {
       if (!items || items.length === 0) {
         console.warn("No items available to initialize search");

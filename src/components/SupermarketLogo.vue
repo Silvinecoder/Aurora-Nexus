@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { supermarketImageHelper } from '@/utils/mixins/helpers/SupermarketImageHelper';
+import { supermarketImageHelper } from '@/utils/helpers/SupermarketImageHelper';
 import Button from "@/components/Buttons.vue";
 
 export default {
