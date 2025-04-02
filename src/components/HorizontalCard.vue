@@ -11,9 +11,8 @@
       </div>
 
     </div>
-    <SupermarketLogo v-if="showSupermarketLogo"
-      :supermarket_names="product.supermarkets.map(s => s.supermarket_name)" />
   </div>
+  <SupermarketLogo v-if="showSupermarketLogo" :supermarket_names="supermarketNames" />
 </template>
 
 <script>
@@ -43,6 +42,11 @@ export default {
       type: Boolean,
       required: false,
       default: true,
+    },
+  },
+  computed: {
+    supermarketNames() {
+      return this.product?.supermarkets?.map(s => s.supermarket_name);
     },
   },
 };

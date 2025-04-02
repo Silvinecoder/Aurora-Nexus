@@ -12,7 +12,7 @@
 
     <button class="standard_icon bubble_icon" v-if="goToShoppingList" @click="shoppingList">
       <svg class="list_icon">
-        <use xlink:href="/icons/supermarkets/assets/list.svg#list__icon"></use>
+        <use xlink:href="../assets/icons/supermarket/list.svg#list__icon"></use>
       </svg>
     </button>
 

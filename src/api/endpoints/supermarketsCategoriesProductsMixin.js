@@ -58,9 +58,15 @@ export const SupermarketsCategoriesProductsMixin = {
         const categoriesWithProducts = await fetchData(
           `/supermarkets/${selectedSupermarket.supermarket_uuid}/categories/products`
         );
-        const filteredCategories = categoriesWithProducts.filter(
-          (category) => category.products && category.products.length > 0
-        );
+        const filteredCategories = categoriesWithProducts
+          .filter(
+            (category) => category.products && category.products.length > 0
+          )
+          .map((category) => ({
+            ...category,
+            hasMoreThanTenProducts: category.products.length > 10,
+          }));
+
         return [
           {
             supermarket_uuid: selectedSupermarket.supermarket_uuid,

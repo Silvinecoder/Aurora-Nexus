@@ -1,6 +1,5 @@
 .shopping_list_delete_button {
   margin: $size-12 0 $size-7 auto;
-
 }
 
 .check_list {
@@ -23,13 +22,12 @@
     margin-bottom: 0;
   }
 
-  .supermarket_toggle__image {
+  .supermarket_toggle--open {
     display: flex;
-    gap: 8px;
-    img {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
+    align-items: center;
+    gap: $size-1;
+    .supermarket-logo {
+      width: 60px;
     }
   }
 
@@ -40,7 +38,7 @@
     gap: $size-7;
 
     section {
-      flex: 1 calc(50% - $size-7);
+      flex: 1 calc(50% - $size-2);
       max-width: 500px;
       box-sizing: border-box;
       border: 2px solid $color-grey-3;
@@ -49,9 +47,17 @@
 
       .horizontal_card {
         width: 100%;
-
         .card_body {
-          width: 100%;
+          width: 80%;
+        }
+      }
+      .supermarket_logo {
+        display: flex;
+        align-items: center;
+        gap: $size-1;
+        margin: 18px 0 0 18px;
+        .supermarket-logo {
+          width: 30px;
         }
       }
 

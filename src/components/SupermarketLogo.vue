@@ -1,14 +1,13 @@
 <template>
   <div class="supermarket_logo" @click="toggleContent()">
-    <!-- Accordion button -->
-    <Button :supermarketAccordionOpen="true" v-if="isOpen"></Button>
-    <Button :supermarketAccordionClosed="true" v-else></Button>
 
     <!-- Supermarkets logo accordion -->
     <div v-if="isOpen" class="content">
       <img v-for="name in supermarket_names" :key="name" :src="getSupermarketImageUrl(name)" :alt="name"
         class="supermarket-logo" />
     </div>
+    <Button :supermarketAccordionOpen="true" v-if="isOpen"></Button>
+    <Button :supermarketAccordionClosed="true" v-else></Button>
   </div>
 </template>
 

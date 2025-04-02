@@ -12,14 +12,11 @@
         <Button class="shopping_list_delete_button" :clearCart="clearCart" />
         <div class="check_list" v-if="cartIsEmpty">Your shopping list is empty.</div>
         <div class="grouped_shopping_list" v-else>
-          <div v-for="(products, supermarket_uuid) in groupedProducts" :key="supermarket_uuid"
-            class="supermarket_section">
-            <SupermarketToggle :supermarket_names="products.length > 0 && products[0].supermarkets && products[0].supermarkets.length > 0
-              ? [products[0].supermarkets[0].supermarket_name]
-              : ['Unknown Supermarket']" />
+          <div v-for="(group, supermarket_uuid) in groupedProducts" :key="supermarket_uuid" class="supermarket_section">
+            <SupermarketToggle :supermarket_names="[group.supermarketName]" />
 
             <div class="horizontal_card__shopping_list">
-              <section v-for="product in products" :key="product.product_uuid">
+              <section v-for="product in group.products" :key="product.product_uuid">
                 <HorizontalCard :product="product" :isAddedToCart="true" :addToCart="addToCart"
                   :removeFromCart="removeFromCart" />
               </section>
@@ -64,16 +61,22 @@ export default {
   methods: {
     ...mapActions(['clearCart', 'addToCart', 'removeFromCart']),
 
-    groupProductsBySupermarket() {
+    groupCartItemsBySupermarket() {
       console.log("Cart contents:", this.cart);
 
       this.groupedProducts = this.cart.reduce((groups, product) => {
         const supermarketUuid = product.supermarkets?.[0]?.supermarket_uuid;
+        const supermarketName = product.supermarkets?.[0]?.supermarket_name;
 
         if (!groups[supermarketUuid]) {
-          groups[supermarketUuid] = [];
+          groups[supermarketUuid] = {
+            supermarketName,
+            products: [],
+          };
         }
-        groups[supermarketUuid].push(product);
+
+        groups[supermarketUuid].products.push(product);
+
         return groups;
       }, {});
     }
@@ -82,7 +85,7 @@ export default {
   async mounted() {
     if (this.getSelectedSupermarket) {
       await this.loadProductsBySupermarket(this.getSelectedSupermarket);
-      this.groupProductsBySupermarket();
+      this.groupCartItemsBySupermarket();
     }
   },
 
@@ -90,14 +93,14 @@ export default {
     // Watch for changes in the list of products
     supermarketsProducts: {
       handler() {
-        this.groupProductsBySupermarket();
+        this.groupCartItemsBySupermarket();
       },
       deep: true
     },
     // Watch for changes in the cart
     cart: {
       handler() {
-        this.groupProductsBySupermarket();
+        this.groupCartItemsBySupermarket();
       },
       immediate: true,
       deep: true
