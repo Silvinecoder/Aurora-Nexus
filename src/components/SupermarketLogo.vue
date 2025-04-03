@@ -2,7 +2,7 @@
   <div class="supermarket_logo" @click="toggleContent()">
 
     <!-- Supermarkets logo accordion -->
-    <div v-if="isOpen" class="content">
+    <div v-if="isOpen" class="supermarket_logo_content">
       <img v-for="name in supermarket_names" :key="name" :src="getSupermarketImageUrl(name)" :alt="name"
         class="supermarket-logo" />
     </div>
@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import { supermarketImageHelper } from '@/utils/helpers/SupermarketImageHelper';
-import Button from "@/components/Buttons.vue";
+import { supermarketImageHelper } from '../utils/helpers/SupermarketImageHelper';
+import Button from "../components/Buttons.vue";
 
 export default {
   mixins: [supermarketImageHelper],

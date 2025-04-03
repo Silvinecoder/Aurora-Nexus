@@ -1,7 +1,7 @@
 <template>
   <div class="page_container">
     <SideBar />
-    <div class="content">
+    <div class="shopping_list_content">
       <div class="top_container">
         <div class="navigation">
           <Search />
@@ -10,16 +10,26 @@
       </div>
       <div class="layout_style">
         <Button class="shopping_list_delete_button" :clearCart="clearCart" />
-        <div class="check_list" v-if="cartIsEmpty">Your shopping list is empty.</div>
+        <div class="check_list" v-if="cartIsEmpty">
+          <h3>Your shopping list is empty.</h3>
+        </div>
         <div class="grouped_shopping_list" v-else>
           <div v-for="(group, supermarket_uuid) in groupedProducts" :key="supermarket_uuid" class="supermarket_section">
-            <SupermarketToggle :supermarket_names="[group.supermarketName]" />
+            <div class="supermarket_section_toggle">
+              <Button :supermarketToggleAdd="true" v-if="!toggleStates[supermarket_uuid]"
+                @click="toggleContent(supermarket_uuid)">Open</button>
+              <Button :supermarketToggleClose="true" v-else @click="toggleContent(supermarket_uuid)">Close</Button>
 
-            <div class="horizontal_card__shopping_list">
-              <section v-for="product in group.products" :key="product.product_uuid">
-                <HorizontalCard :product="product" :isAddedToCart="true" :addToCart="addToCart"
-                  :removeFromCart="removeFromCart" />
-              </section>
+              <SupermarketToggle :supermarket_names="[group.supermarketName]" />
+            </div>
+            <!-- Supermarkets logo accordion -->
+            <div v-if="toggleStates[supermarket_uuid]" class="content">
+              <div class="horizontal_card__shopping_list">
+                <section v-for="product in group.products" :key="product.product_uuid">
+                  <HorizontalCard :product="product" :isAddedToCart="true" :addToCart="addToCart"
+                    :removeFromCart="removeFromCart" />
+                </section>
+              </div>
             </div>
           </div>
         </div>
@@ -30,13 +40,13 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
-import Button from "@/components/Buttons.vue";
-import Search from "@/components/Search.vue";
-import HorizontalCard from "@/components/HorizontalCard.vue";
-import SideBar from "@/components/SideBar.vue";
-import SupermarketToggle from "@/components/SupermarketToggle.vue";
-import { ProductsMixin } from '@/api/endpoints/productsMixin';
-import { supermarketImageHelper } from '@/utils/helpers/SupermarketImageHelper';
+import Button from "../../components/Buttons.vue";
+import Search from "../../components/Search.vue";
+import HorizontalCard from "../../components/HorizontalCard.vue";
+import SideBar from "../../components/SideBar.vue";
+import SupermarketToggle from "../../components/SupermarketToggle.vue";
+import { ProductsMixin } from '../../api/endpoints/products';
+import { supermarketImageHelper } from '../../utils/helpers/SupermarketImageHelper';
 
 export default {
   components: { Button, Search, HorizontalCard, SideBar, SupermarketToggle },
@@ -44,6 +54,7 @@ export default {
 
   data() {
     return {
+      toggleStates: {},
       groupedProducts: {},
     };
   },
@@ -56,6 +67,12 @@ export default {
     cartIsEmpty() {
       return this.cart.length === 0;
     },
+    supermarketToggleClass() {
+      return {
+        supermarket_toggle: true,
+        "supermarket_toggle--open": this.isOpen
+      };
+    }
   },
 
   methods: {
@@ -75,11 +92,18 @@ export default {
           };
         }
 
+        if (groups[supermarketUuid] && this.toggleStates[supermarketUuid] === undefined) {
+          this.toggleStates[supermarketUuid] = true;
+        }
+
         groups[supermarketUuid].products.push(product);
 
         return groups;
       }, {});
-    }
+    },
+    toggleContent(supermarketUuid) {
+      this.toggleStates[supermarketUuid] = !this.toggleStates[supermarketUuid];
+    },
   },
 
   async mounted() {

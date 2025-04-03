@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import SupermarketLogo from '@/components/SupermarketLogo.vue';
-import Button from '@/components/Buttons.vue';
+import SupermarketLogo from '../components/SupermarketLogo.vue';
+import Button from '../components/Buttons.vue';
 
 export default {
   components: { SupermarketLogo, Button },
