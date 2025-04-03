@@ -1,3 +1,5 @@
+@use "../global/global";
+
 .sidebar {
   margin: 0;
   padding: 0;
@@ -8,7 +10,7 @@
   display: none;
 
   img{
-    margin-top: $size-11;
+    margin-top: global.$size-11;
     max-width: 100%;
     height: auto;
   }

@@ -1,14 +1,14 @@
-@import 'global/global';
-@import 'global/typography';
-@import 'global/layout';
+@use 'global/global';
+@use 'global/typography';
+@use 'global/layout';
 
 // components
-@import 'components/navigation';
-@import 'components/sidebar';
-@import 'components/search';
-@import 'components/button';
-@import 'components/cards';
-@import 'components/carousel';
+@use 'components/navigation';
+@use 'components/sidebar';
+@use 'components/search';
+@use 'components/button';
+@use 'components/cards';
+@use 'components/carousel';
 
 // pages
-@import 'page/shopping_list';
+@use 'page/shopping_list';

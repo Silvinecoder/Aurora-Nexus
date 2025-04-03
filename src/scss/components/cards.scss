@@ -1,3 +1,6 @@
+@use "../global/global";
+@use "../global/typography";
+
 // CARDS COMPONENTS
 
 // Global
@@ -11,18 +14,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: $size-7;
+  margin-top: global.$size-7;
 
   p {
-    color: $color-grey-4;
+    color: global.$color-grey-4;
   }
 }
 
 // Horizontal Cards
 .horizontal_card_container {
-  margin-bottom: $size-12;
-  border-bottom: 1px solid $color-grey-3;
-  padding-bottom: $size-7;
+  margin-bottom: global.$size-12;
+  border-bottom: 1px solid global.$color-grey-3;
+  padding-bottom: global.$size-7;
 
   .card_body {
     width: 158px;
@@ -40,17 +43,17 @@
 
   .product_image {
     width: 117px;
-    margin-right: $size-8;
+    margin-right: global.$size-8;
   }
 
   .price_button_container {
-    margin: $size-8 0;
+    margin: global.$size-8 0;
   }
 }
 
 // Cards
 .cards__category_container {
-  margin-bottom: $size-9;
+  margin-bottom: global.$size-9;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -62,8 +65,8 @@
     justify-content: space-between;
 
     .cards__category_title {
-      font-size: $font-size-7;
-      margin: $size-9 0 $size-12 0;
+      font-size: typography.$font-size-7;
+      margin: global.$size-9 0 global.$size-12 0;
     }
 
     a {
@@ -75,14 +78,14 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    row-gap: $size-14;
+    row-gap: global.$size-14;
 
     .card {
-      border: 2px solid $color-grey-3;
-      border-radius: $size-4;
+      border: 2px solid global.$color-grey-3;
+      border-radius: global.$size-4;
       max-width: 200px;
       width: 100%;
-      padding-top: $size-7;
+      padding-top: global.$size-7;
 
       .product_image {
         width: 150px;
@@ -92,13 +95,13 @@
       }
 
       .card_body {
-        padding: $size-9 $size-7 $size-4 $size-7;
+        padding: global.$size-9 global.$size-7 global.$size-4 global.$size-7;
 
         .supermarket_logo {
           display: flex;
           img {
-            width: $size-8;
-            height: $size-8;
+            width: global.$size-8;
+            height: global.$size-8;
           }
         }
       }

@@ -1,13 +1,15 @@
+@use "../global/global";
+
 .standard_icon {
-  width: $size-9;
-  height: $size-9;
+  width: global.$size-9;
+  height: global.$size-9;
 }
 
 .bubble_icon {
-  background: $color-white;
-  width: $size-13;
-  height: $size-13;
-  border-radius: $size-7;
+  background: global.$color-white;
+  width: global.$size-13;
+  height: global.$size-13;
+  border-radius: global.$size-7;
   padding-top: 3px;
 
   .list_icon {
@@ -23,7 +25,7 @@
 
 .supermarket_icon {
   width: 11px;
-  height: $size-9;
+  height: global.$size-9;
 }
 
 //Dropdown Buttons
@@ -43,19 +45,19 @@
 .card {
   button {
     margin: 0;
-    max-width: $size-12;
-    max-height: $size-12;
+    max-width: global.$size-12;
+    max-height: global.$size-12;
     svg {
-      width: $size-12;
-      height: $size-12;
+      width: global.$size-12;
+      height: global.$size-12;
     }
   }
 }
 
 .supermarket_accordion_closed__button,
 .supermarket_accordion_open__button {
-  width: $size-7;
-  height: $size-7;
+  width: global.$size-7;
+  height: global.$size-7;
   svg {
     width: 100%;
     height: 100%;
@@ -66,10 +68,10 @@
 .see_less__button {
   display: flex;
   align-items: center;
-  gap: $size-4;
+  gap: global.$size-4;
   svg {
-    width: $size-11;
-    height: $size-11;
+    width: global.$size-11;
+    height: global.$size-11;
   }
 }
 

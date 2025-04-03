@@ -1,7 +1,9 @@
+@use "../global/global";
+
 .carousel__container {
   display: flex;
   justify-content: space-between;
-  padding: $size-7 0 $size-7 0;
+  padding: global.$size-7 0 global.$size-7 0;
   width: 100%;
   max-width: 1030px;
 
@@ -24,7 +26,7 @@
 
 .no_supermarket_selected,
 .loading_container {
-  color: $color-grey-1;
+  color: global.$color-grey-1;
   text-align: center;
   margin-top: 200px;
 }

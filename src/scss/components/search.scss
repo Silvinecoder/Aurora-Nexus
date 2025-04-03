@@ -1,21 +1,23 @@
+@use "../global/global";
+
 .search_button {
-  color: $color-grey-1;
+  color: global.$color-grey-1;
 }
 
 .search_dropdown_container {
   position: relative;
 
   .search_input {
-    background: $color-white url("/icons/supermarkets/assets/search.svg")
-      no-repeat $size-2;
-    background-size: $size-7;
-    border-radius: $size-7;
+    background: global.$color-white url("/icons/supermarkets/assets/search.svg")
+      no-repeat global.$size-2;
+    background-size: global.$size-7;
+    border-radius: global.$size-7;
     text-align: left;
-    padding-left: $size-15;
+    padding-left: global.$size-15;
     width: auto;
     min-width: 230px;
     max-width: 300px;
-    height: $size-13;
+    height: global.$size-13;
 
     &:focus::placeholder {
       color: transparent;
@@ -28,10 +30,10 @@
     overflow: scroll;
     scrollbar-width: thin;
     position: absolute;
-    background: $color-white;
-    border: 2px solid $color-grey-3;
-    border-radius: $size-12;
-    padding: $size-7 $size-9;
+    background: global.$color-white;
+    border: 2px solid global.$color-grey-3;
+    border-radius: global.$size-12;
+    padding: global.$size-7 global.$size-9;
     z-index: 1;
 
     @media screen and (min-width: 500px) {

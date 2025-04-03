@@ -1,3 +1,5 @@
+@use "../global/global";
+
 .top_container {
   display: block;
   content: " ";
@@ -5,11 +7,11 @@
   background-size: cover;
   background-position: center bottom;
   background-image: url("/src/assets/global/background-image.png");
-  border-radius: 0 0 0 $size-19;
+  border-radius: 0 0 0 global.$size-19;
   position: relative;
 
   .navigation {
-    padding: $size-10 $size-11 $size-10 $size-19;
+    padding: global.$size-10 global.$size-11 global.$size-10 global.$size-19;
     display: flex;
     justify-content: space-between;
   }
