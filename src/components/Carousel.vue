@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import { SupermarketsCategoriesProductsMixin } from '@/api/endpoints/supermarketsCategoriesProductsMixin';
-import { supermarketImageHelper } from '@/utils/helpers/SupermarketImageHelper';
+import { SupermarketsCategoriesProductsMixin } from '../api/endpoints/supermarkets';
+import { supermarketImageHelper } from '../utils/helpers/SupermarketImageHelper';
 
 export default {
   mixins: [SupermarketsCategoriesProductsMixin, supermarketImageHelper],

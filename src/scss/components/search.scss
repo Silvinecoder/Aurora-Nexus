@@ -2,44 +2,46 @@
   color: $color-grey-1;
 }
 
-.search_dropdown_container{
+.search_dropdown_container {
   position: relative;
-  
-.search_input {
-  background: $color-white url("/icons/supermarkets/assets/search.svg") no-repeat $size-2;
-  background-size: $size-7;
-  border-radius: $size-7;
-  text-align: left;
-  padding-left: $size-15;
-  width: 100%;
-  max-width: 230px;
-  height: $size-13;
 
-  &:focus::placeholder {
-    color: transparent;
-  }
-}
+  .search_input {
+    background: $color-white url("/icons/supermarkets/assets/search.svg")
+      no-repeat $size-2;
+    background-size: $size-7;
+    border-radius: $size-7;
+    text-align: left;
+    padding-left: $size-15;
+    width: auto;
+    min-width: 230px;
+    max-width: 300px;
+    height: $size-13;
 
-.dropdown_container{
-  max-height: 500px;
-  height: auto;
-  overflow: scroll;
-  scrollbar-width: thin;
-  position: absolute;
-  background: $color-white;
-  border: 2px solid $color-grey-3;
-  border-radius: $size-12;
-  padding: $size-7 $size-9;
-  z-index: 1;
-
-  @media screen and (min-width: 500px){
-    right: 0;
-  }
-
-  @media screen and (max-width: 414px){
-    .horizontal_card{
-      flex-wrap: wrap;
+    &:focus::placeholder {
+      color: transparent;
     }
   }
-}
+
+  .dropdown_container {
+    max-height: 500px;
+    height: auto;
+    overflow: scroll;
+    scrollbar-width: thin;
+    position: absolute;
+    background: $color-white;
+    border: 2px solid $color-grey-3;
+    border-radius: $size-12;
+    padding: $size-7 $size-9;
+    z-index: 1;
+
+    @media screen and (min-width: 500px) {
+      right: 0;
+    }
+
+    @media screen and (max-width: 414px) {
+      .horizontal_card {
+        flex-wrap: wrap;
+      }
+    }
+  }
 }

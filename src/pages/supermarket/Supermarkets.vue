@@ -35,13 +35,13 @@
 </template>
 
 <script>
-import Button from "@/components/Buttons.vue";
-import Carousel from "@/components/Carousel.vue";
-import Card from "@/components/Card.vue";
+import Button from "../../components/Buttons.vue";
+import Carousel from "../../components/Carousel.vue";
+import Card from "../../components/Card.vue";
 import CategoryTitle from '../../components/CategoryTitle.vue';
-import Search from "@/components/Search.vue";
-import SideBar from "@/components/SideBar.vue";
-import { SupermarketsCategoriesProductsMixin } from "@/api/endpoints/supermarketsCategoriesProductsMixin";
+import Search from "../../components/Search.vue";
+import SideBar from "../../components/SideBar.vue";
+import { SupermarketsCategoriesProductsMixin } from "../../api/endpoints/supermarkets";
 import { mapGetters, mapActions } from "vuex";
 
 export default {

@@ -1,4 +1,4 @@
-import { fetchData } from "@/api/config/db_config";
+import { fetchData } from "../config/db_config";
 
 export const ProductsMixin = {
   data() {
