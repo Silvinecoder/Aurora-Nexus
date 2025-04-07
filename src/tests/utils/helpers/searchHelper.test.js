@@ -1,12 +1,19 @@
-const searchHelper = require("../../../utils/helpers/searchHelper");
+import { searchHelper } from "../../../utils/helpers/searchHelper";
 
-test("it initialises search with items in the searchBar", () => {
-  // First create items you can assert
-  const items = ["apple", "strawberry"];
-  // make a const to get the searchHelper function and call it
-  const searchBar = searchHelper.data();
-  // Initialize the search with items
-  searchBar.initializeSearch(items);
-  // Assert that the searchBar.fuse is an instance of Fuse
-  expect(searchBar.fuse.list).toEqual(items);
+test("Create items, Search through them by filtering", () => {
+  const context = {
+    fuse: null,
+  };
+  const itemArray = [
+    { name: "apple" }, 
+    { name: "strawberry"}
+  ];
+  const initialize = searchHelper.methods.initializeSearch.bind(context)
+  initialize(itemArray)
+
+  const filtered = searchHelper.methods.getFilteredItems.bind(context);
+  const search = filtered("app");  
+  console.log("Actual search result:", search);
+
+  expect(search).toEqual([{name: "apple"}]);
 });
