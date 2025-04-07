@@ -40,13 +40,13 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
-import Button from "../../components/Buttons.vue";
-import Search from "../../components/Search.vue";
-import HorizontalCard from "../../components/HorizontalCard.vue";
-import SideBar from "../../components/SideBar.vue";
-import SupermarketToggle from "../../components/SupermarketToggle.vue";
-import { ProductsMixin } from '../../api/endpoints/products';
-import { supermarketImageHelper } from '../../utils/helpers/SupermarketImageHelper';
+import Button from "../components/Buttons.vue";
+import Search from "../components/Search.vue";
+import HorizontalCard from "../components/HorizontalCard.vue";
+import SideBar from "../components/SideBar.vue";
+import SupermarketToggle from "../components/SupermarketToggle.vue";
+import { ProductsMixin } from '../api/endpoints/products';
+import { supermarketImageHelper } from '../utils/helpers/SupermarketImageHelper';
 
 export default {
   components: { Button, Search, HorizontalCard, SideBar, SupermarketToggle },

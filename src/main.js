@@ -5,8 +5,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import store from "./utils/store/index";
 
 // Import your components for routing
-import SupermarketsPage from "./pages/supermarket/Supermarkets.vue";
-import ShoppingList from "../src/pages/supermarket/ShoppingList.vue";
+import SupermarketsPage from "./pages/Supermarkets.vue";
+import ShoppingList from "./pages/ShoppingList.vue";
 
 // Create a router instance
 const router = createRouter({
